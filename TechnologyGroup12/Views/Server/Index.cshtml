@@ -61,15 +61,25 @@
                                         <div class="form-group">
                                             <input asp-for="passWord" type="password" class="form-control" id="readonlyPasswordInput" placeholder="Password" readonly>
                                         </div>
-                                        @if (Model.databaseTable.Count() > 0)
+                                        @if (Model.databaseTable.Count() > 0 && Model.databaseName == null)
                                         {
                                             <div class="form-group">
                                                 @Html.DropDownListFor(m => m.databaseName, Model.databaseTable, "-Select a Table", new { @class = "form-control" })
-                                                <span asp-validation-for="databaseName" class="text-danger" ></span>
+                                                <span asp-validation-for="databaseName" class="text-danger"></span>
                                             </div>
-                                            <button onclick="GetDatabase()" type="submit" class="btn btn-success btn-user btn-block" style="color:black ; font-size:large">
+                                            <button onclick="GetDatabase()" type="submit" class="btn btn-info btn-user btn-block" style="color:black ; font-size:large">
                                                 Connect
                                             </button>
+                                        }
+                                        else if (Model.databaseTable.Count() > 0 && Model.databaseName != null)
+                                        {
+                                            <div class="form-group">
+                                                @Html.DropDownListFor(m => m.databaseName, Model.databaseTable, "-Select a Table", new { @class = "form-control" })
+                                                <span asp-validation-for="databaseName" class="text-danger"></span>
+                                            </div>                     
+                                            <a asp-controller="Home" asp-action="Index" class="btn btn-success btn-user btn-block" style="color:black ; font-size:large">
+                                                Go To Index
+                                            </a>
                                         }
                                         else
                                         {

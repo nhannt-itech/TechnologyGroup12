@@ -32,7 +32,7 @@ namespace TechnologyGroup12.Controllers
             });
             List<string> lDatabase = new List<string>();
             ServerConnection serverConnection = new ServerConnection();
-            serverConnection.serverName = @"localhost\SQLEXPRESS";
+            serverConnection.serverName = @"";
 
             serverConnection.databaseTable = lDatabase.Select(i => new SelectListItem
             {
@@ -82,7 +82,6 @@ namespace TechnologyGroup12.Controllers
             }
             else if (serverConnection.serverName != null)
             {
-                // "Server=localhost\\SQLEXPRESS;Database=TechnologyGroup12DB;Trusted_Connection=True;MultipleActiveResultSets=true"
                 try
                 {
                     var connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.databaseName, serverConnection.userName,
