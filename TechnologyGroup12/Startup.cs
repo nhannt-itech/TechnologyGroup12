@@ -9,7 +9,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using TechnologyGroup12.DataAccess.Data;
+using TechnologyGroup12.Models.ExtentionModels;
+using TechnologyGroup12.Models.ExtentionModels.IExtensionModels;
 
 namespace TechnologyGroup12
 {
@@ -26,6 +29,17 @@ namespace TechnologyGroup12
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+            //---------------------------------------
+            services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+            services.AddTransient<IWritableOptions<ConnectionStrings>>(provider =>
+            {
+                var configuration = (IConfigurationRoot)provider.GetService<IConfiguration>();
+                var environment = provider.GetService<Microsoft.AspNetCore.Hosting.IHostingEnvironment>();
+                var options = provider.GetService<IOptionsMonitor<ConnectionStrings>>();
+                return new WritableOptions<ConnectionStrings>(environment, options, configuration, Configuration.GetSection("ConnectionStrings").Key, "appsettings.json");
+            });
+            //---------------------------------------
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -55,7 +69,7 @@ namespace TechnologyGroup12
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Server}/{action=Index}/{id?}");
             });
         }
     }

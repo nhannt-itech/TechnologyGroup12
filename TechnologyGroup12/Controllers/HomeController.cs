@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TechnologyGroup12.Models;
+using TechnologyGroup12.Models.ExtentionModels;
+using TechnologyGroup12.Models.ExtentionModels.IExtensionModels;
 
 namespace TechnologyGroup12.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
 
         public HomeController(ILogger<HomeController> logger)
         {
