@@ -16,6 +16,7 @@ using TechnologyGroup12.Models.ExtentionModels.IExtensionModels;
 
 namespace TechnologyGroup12
 {
+    //Scaffold-DbContext "Server=.\SQLEXPRESS;Database=TechnologyStoreDB;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -69,7 +70,7 @@ namespace TechnologyGroup12
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Server}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

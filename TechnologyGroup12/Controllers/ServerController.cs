@@ -84,7 +84,7 @@ namespace TechnologyGroup12.Controllers
             {
                 try
                 {
-                    var connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.databaseName, serverConnection.userName,
+                    var connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.userName,
                     serverConnection.passWord);
 
                     List<string> lDatabase = new List<string>();

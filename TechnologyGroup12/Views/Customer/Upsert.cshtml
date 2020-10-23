@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+        <div class="offset-3 col-lg-6 ">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">ADD CUSTOMER</h1>
+                </div>
+                <form class="user">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Your Name...">
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Birthday:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input type="datetime-local" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Gender:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <select name="Gender" class="form-control">
+                                <option value="Other">Other</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Your Phone...">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Your Email...">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Your Address...">
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox small">
+                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                            <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        </div>
+                    </div>
+                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                        Add
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<hr>
+    <a href="index.html" class="btn btn-google btn-user btn-block">
+        <i class="fab fa-google fa-fw"></i> Login with Google
+    </a>
+    <a href="index.html" class="btn btn-facebook btn-user btn-block">
+        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+    </a>*@
+
