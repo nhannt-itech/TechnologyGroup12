@@ -1,0 +1,138 @@
+﻿@model TechnologyGroup12.Models.ViewModels.EmployeeVM
+@{
+    var Title = "ADD EMPLOYEE";
+
+    if (Model.Employee.Id.ToString() != "00000000-0000-0000-0000-000000000000")
+    {
+        Title = "UPDATE EMPLOYEE";
+    }
+
+    ViewData["Title"] = Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+        <div class="offset-3 col-lg-6 ">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">@Title</h1>
+                </div>
+                <form method="post" class="user">
+                    <div class="form-group">
+                        <input id="employeeId" asp-for="Employee.Id" type="text" class="form-control" placeholder="Enter Your Name..." hidden>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Employee.Name" type="text" class="form-control" placeholder="Enter Your Name...">
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Birthday:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="Employee.Birth" type="datetime-local" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            Gender:
+                        </div>
+                        <div class="form-group col-9">
+                            @Html.DropDownListFor(m => m.Employee.Gender, Model.GenderList, "-Select a Category",
+                           new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Employee.Phone" type="text" class="form-control" placeholder="Enter Your Phone...">
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Employee.Email" type="text" class="form-control" placeholder="Enter Your Email...">
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Employee.Address" type="text" class="form-control" placeholder="Enter Your Address...">
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            Job:
+                        </div>
+                        <div class="form-group col-9">
+                            @Html.DropDownListFor(m => m.Employee.JobPositionId, Model.JobPositionList, "-Select a Category",
+                           new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    @if (Model.Employee.Id.ToString() == "00000000-0000-0000-0000-000000000000")
+                    {
+                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                            Add
+                        </button>
+
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                            Update
+                        </button>
+                    }
+                    <a asp-controller="Employee" asp-action="Index" class="btn btn-warning btn-user btn-block">
+                        < Back To List
+                    </a>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header py-2">
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right">
+                <div class="input-group">
+                    <a asp-controller="Dependents" asp-action="Insert" asp-route-id="@Model.Employee.Id" type="submit" class="btn btn-primary mr-3" style="color:white">
+                        Add Dependents
+                    </a>
+                    <select name="Gender" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
+                        <option value="Name">Name</option>
+                        <option value="Phone">Phone</option>
+                        <option value="Email">Email</option>
+                        <option value="Address">Address</option>
+                    </select>
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-body">
+            <div class="">
+                <br />
+                <table class="table table-bordered" id="tblData" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Phone</th>
+                            <th>Birth</th>
+                            <th>Relationship</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/js/dependents.js"></script>
+
+    
+}
+

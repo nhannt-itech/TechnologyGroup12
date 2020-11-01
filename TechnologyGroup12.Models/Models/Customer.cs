@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TechnologyGroup12.Models.Models
 {
@@ -11,6 +12,7 @@ namespace TechnologyGroup12.Models.Models
         }
 
         public Guid Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public DateTime? Birth { get; set; }
         public string Gender { get; set; }

@@ -13,10 +13,11 @@ namespace TechnologyGroup12.Models.ExtentionModels
         public static SqlConnection Connect(string Server, string DatabaseTable, string UserName, string Password)
         {
             string connString = @"Data Source=" + Server + ";Initial Catalog="
-                       + DatabaseTable + ";Integrated Security=True;User ID=" + UserName + ";Password=" + Password;
+                       + DatabaseTable + ";User ID=" + UserName + ";Password=" + Password;
 
             return new SqlConnection(connString);
         }
+
 
         public static SqlConnection Connect(string Server, string databasename)
         {
@@ -26,7 +27,14 @@ namespace TechnologyGroup12.Models.ExtentionModels
         }
         public static SqlConnection Connect(string Server, string Username, string password)
         {
-            string connString = @"Data Source=" + Server + ";Integrated Security=True;User ID =" + Username + "; Password =" + password;
+            string connString = @"Data Source=" + Server + ";User ID =" + Username + "; Password =" + password;
+            return new SqlConnection(connString);
+        }
+
+        public static SqlConnection Connect(string Server)
+        {
+            string connString = @"Data Source=" + Server + ";User ID =" + "; Password =" 
+                                    + ";Integrated Security=True"; ;
             return new SqlConnection(connString);
         }
     }

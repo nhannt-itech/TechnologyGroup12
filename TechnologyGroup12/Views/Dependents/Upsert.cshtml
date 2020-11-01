@@ -1,10 +1,10 @@
-﻿@model TechnologyGroup12.Models.Models.Customer
+﻿@model TechnologyGroup12.Models.Models.Dependents
 @{
-    var Title = "ADD CUSTOMER";
+    var Title = "ADD DEPENDENTS";
 
     if (Model.Id.ToString() != "00000000-0000-0000-0000-000000000000")
     {
-        Title = "UPDATE CUSTOMER";
+        Title = "UPDATE DEPENDENTS";
     }
 
     ViewData["Title"] = Title;
@@ -21,7 +21,16 @@
                 <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">@Title</h1>
                 </div>
-                <form method="post" class="user">
+                <form asp-action="Upsert" method="post" class="user">
+
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Employee Id:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="EmployeeId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <input asp-for="Name" type="text" class="form-control" placeholder="Enter Your Name...">
                     </div>
@@ -48,25 +57,17 @@
                     <div class="form-group">
                         <input asp-for="Phone" type="text" class="form-control" placeholder="Enter Your Phone...">
                     </div>
+
                     <div class="form-group">
-                        <input asp-for="Email" type="text" class="form-control" placeholder="Enter Your Email...">
+                        <input asp-for="Relationship" type="text" class="form-control" placeholder="Enter Your Address...">
                     </div>
-                    <div class="form-group">
-                        <input asp-for="Address" type="text" class="form-control" placeholder="Enter Your Address...">
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox small">
-                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                            <label class="custom-control-label" for="customCheck">Remember Me</label>
-                        </div>
-                    </div>
+
 
                     @if (Model.Id.ToString() == "00000000-0000-0000-0000-000000000000")
                     {
                         <button type="submit" class="btn btn-primary btn-user btn-block">
                             Add
                         </button>
-
                     }
                     else
                     {
@@ -82,12 +83,4 @@
         </div>
     </div>
 </div>
-
-@*<hr>
-    <a href="index.html" class="btn btn-google btn-user btn-block">
-        <i class="fab fa-google fa-fw"></i> Login with Google
-    </a>
-    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-    </a>*@
 

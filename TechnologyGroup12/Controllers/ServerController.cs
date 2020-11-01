@@ -28,7 +28,7 @@ namespace TechnologyGroup12.Controllers
         {
             _writableCnt.Update(opt =>
             {
-                opt.DefaultConnection = "test";
+                opt.DefaultConnection = "Server=localhost\\SQLEXPRESS;Database=TechnologyStoreDB;Trusted_Connection=True;";
             });
             List<string> lDatabase = new List<string>();
             ServerConnection serverConnection = new ServerConnection();
@@ -49,8 +49,19 @@ namespace TechnologyGroup12.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.databaseName, serverConnection.userName,
                     serverConnection.passWord);
+                if (serverConnection.userName != null)
+                {
+                    connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.databaseName, serverConnection.userName,
+                    serverConnection.passWord);
+                }
+                else
+                {
+                    connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.databaseName);
+                }
+
 
                 List<string> lDatabase = new List<string>();
                 connectionString.Open();
@@ -74,7 +85,8 @@ namespace TechnologyGroup12.Controllers
                     opt.DefaultConnection = @"Server=" + serverConnection.serverName +
                     @";Database=" + serverConnection.databaseName +
                     @";User Id=" + serverConnection.userName +
-                    @"; Password=" + serverConnection.passWord + @";";
+                    @"; Password=" + serverConnection.passWord +
+                    @";Trusted_Connection=True;";
                 });
 
                 return View(serverConnection);
@@ -86,7 +98,16 @@ namespace TechnologyGroup12.Controllers
                 {
                     var connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.userName,
                     serverConnection.passWord);
-
+                     if (serverConnection.userName != null)
+                    {
+                        connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.userName,
+                    serverConnection.passWord);
+                    }
+                    else
+                    {
+                        connectionString = ExecuteConnection.Connect(serverConnection.serverName);
+                    }
+                    
                     List<string> lDatabase = new List<string>();
                     connectionString.Open();
                     SqlCommand cmd = new SqlCommand("SELECT name from sys.databases", connectionString);

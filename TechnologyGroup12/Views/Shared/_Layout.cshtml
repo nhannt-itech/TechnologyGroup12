@@ -56,16 +56,54 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Customer" asp-action="Index" data-toggle="" data-target="#collapseCustomers" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Customers</span>
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorks" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-briefcase"></i>
+                    <span>Works</span>
+                </a>
+                <div id="collapseWorks" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        @*<h6 class="collapse-header">Custom Utilities:</h6>*@
+                        <a class="collapse-item" asp-controller="Employee" asp-action="Index">Employees</a>
+                        <a class="collapse-item" asp-controller="Server" asp-action="Index">Accounts</a>
+                        <a class="collapse-item" asp-controller="JobPosition" asp-action="Index">Job Positions</a>
+                        <a class="collapse-item" asp-controller="Server" asp-action="Index">Relatives</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseShops" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-shopping-basket"></i>
+                    <span>Shops</span>
+                </a>
+                <div id="collapseShops" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-controller="Product" asp-action="Index">Products</a>
+                        <a class="collapse-item" asp-controller="Category" asp-action="Index">Categories</a>
+                        <a class="collapse-item" asp-controller="Manufacturer" asp-action="Index">Manufacturers</a>
+                    </div>
+                </div>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Manager</span>
+                    <i class="fas fa-fw fa-money-bill"></i>
+                    <span>Bills & Discounts</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Customer</h6>
-                        <a class="collapse-item" asp-controller="Customer" asp-action="Index">List</a>
-                        <a class="collapse-item" asp-controller="Customer" asp-action="Upsert">Add</a>
+                        <a class="collapse-item" asp-controller="Bill" asp-action="Index">Bills</a>
+                        <a class="collapse-item" asp-controller="Discount" asp-action="Index">Discounts</a>
                     </div>
                 </div>
             </li>
@@ -83,6 +121,8 @@
                     </div>
                 </div>
             </li>
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -374,7 +414,8 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="~/Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -389,6 +430,14 @@
     <!-- Page level custom scripts -->
     <script src="~/Assets/js/demo/chart-area-demo.js"></script>
     <script src="~/Assets/js/demo/chart-pie-demo.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://kit.fontawesome.com/e19c476714.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 

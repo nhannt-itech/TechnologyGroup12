@@ -165,7 +165,7 @@ namespace TechnologyGroup12.DataAccess.Data
 
                 entity.Property(e => e.Relationship).HasMaxLength(20);
 
-                entity.Property(e => e.Sex).HasMaxLength(10);
+                entity.Property(e => e.Gender).HasMaxLength(10);
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Dependents)

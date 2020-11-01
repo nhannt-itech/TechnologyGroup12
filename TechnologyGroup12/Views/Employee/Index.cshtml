@@ -7,8 +7,8 @@
     <div class="card-header py-2">
         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right">
             <div class="input-group">
-                <a asp-controller="Customer" asp-action="Upsert" type="submit" class="btn btn-primary mr-3" style="color:white">
-                    Add Customer
+                <a asp-controller="Employee" asp-action="Upsert" type="submit" class="btn btn-primary mr-3" style="color:white">
+                    Add Employee
                 </a>
                 <select name="Gender" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
                     <option value="Name">Name</option>
@@ -35,7 +35,7 @@
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Address</th>
-                        <th>Vip</th>
+                        <th>Job</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -46,6 +46,6 @@
 
 @section Scripts{
     <script src="~/Assets/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/js/customer.js"></script>
+    <script src="~/js/employee.js"></script>
 }
 

@@ -59,7 +59,7 @@
                                             <input asp-for="userName" type="text" class="form-control" id="readonlyUserInput" placeholder="Username" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <input asp-for="passWord" type="password" class="form-control" id="readonlyPasswordInput" placeholder="Password" readonly>
+                                            <input asp-for="passWord" type="text" class="form-control" id="readonlyPasswordInput" placeholder="Password" readonly>
                                         </div>
                                         @if (Model.databaseTable.Count() > 0 && Model.databaseName == null)
                                         {

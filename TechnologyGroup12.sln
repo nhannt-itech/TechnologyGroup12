@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyGroup12", "TechnologyGroup12\TechnologyGroup12.csproj", "{E52719CF-84F9-4F2A-8C63-0C9DBC8A7CF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechnologyGroup12", "TechnologyGroup12\TechnologyGroup12.csproj", "{E52719CF-84F9-4F2A-8C63-0C9DBC8A7CF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyGroup12.DataAccess", "TechnologyGroup12.Dataa\TechnologyGroup12.DataAccess.csproj", "{D4F68E4C-D6E5-4921-A986-FCA8259A9CD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechnologyGroup12.DataAccess", "TechnologyGroup12.Dataa\TechnologyGroup12.DataAccess.csproj", "{D4F68E4C-D6E5-4921-A986-FCA8259A9CD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyGroup12.Models", "TechnologyGroup12.Models\TechnologyGroup12.Models.csproj", "{7DCA3B95-CA70-44C1-A3A4-439765D8D706}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechnologyGroup12.Models", "TechnologyGroup12.Models\TechnologyGroup12.Models.csproj", "{7DCA3B95-CA70-44C1-A3A4-439765D8D706}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnologyGroup12.Utility", "TechnologyGroup12.Utility\TechnologyGroup12.Utility.csproj", "{844DED70-02D0-46D9-BB74-3F271AECAF05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechnologyGroup12.Utility", "TechnologyGroup12.Utility\TechnologyGroup12.Utility.csproj", "{844DED70-02D0-46D9-BB74-3F271AECAF05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
