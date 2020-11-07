@@ -15,7 +15,6 @@ namespace TechnologyGroup12.Models.Models
         public string Nation { get; set; }
         public int Phone { get; set; }
         public string Email { get; set; }
-
         public virtual ICollection<Product> Product { get; set; }
     }
 }
