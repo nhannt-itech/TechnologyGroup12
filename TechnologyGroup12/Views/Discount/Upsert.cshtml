@@ -1,0 +1,69 @@
+﻿@model TechnologyGroup12.Models.Models.Discount
+@{
+    var Title = "ADD DISCOUNT";
+
+    if (Model.Id != "")
+    {
+        Title = "UPDATE DISCOUNT";
+    }
+
+    ViewData["Title"] = Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+        <div class="offset-3 col-lg-6 ">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">@Title</h1>
+                </div>
+                <form method="post" class="user">
+                    <div class="form-group">
+                        <input asp-for="Id" type="text" class="form-control" placeholder="Enter Code...">
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Name" type="text" class="form-control" placeholder="Enter Name...">
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Description" type="text" class="form-control" placeholder="Enter Description...">
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Discount:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="DiscountValue" type="number" class="form-control" placeholder="Enter Discount Value...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Start:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="StartDate" type="datetime-local" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>End:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="EndDate" type="datetime-local" class="form-control">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                        Upsert
+                    </button>
+
+                    <a asp-controller="Discount" asp-action="Index" class="btn btn-warning btn-user btn-block">
+                        < Back To List
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

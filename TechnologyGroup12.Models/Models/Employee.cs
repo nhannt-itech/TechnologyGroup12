@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechnologyGroup12.Models.Models
 {
@@ -23,7 +25,10 @@ namespace TechnologyGroup12.Models.Models
         public int? YearEmployee { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime ModifyDate { get; set; }
-
+        [NotMapped]
+        public IEnumerable<SelectListItem> JobPositionList { get; set; }
+        [NotMapped]
+        public IEnumerable<SelectListItem> GenderList { get; set; }
         public virtual JobPosition JobPosition { get; set; }
         public virtual ICollection<Account> Account { get; set; }
         public virtual ICollection<Bill> Bill { get; set; }

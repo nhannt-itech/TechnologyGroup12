@@ -7,11 +7,14 @@
     <div class="card-header py-2">
         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right">
             <div class="input-group">
-                <a asp-controller="Category" asp-action="Upsert" type="submit" class="btn btn-primary mr-3" style="color:white">
-                    Add Category
+                <a asp-controller="Product" asp-action="Upsert" type="submit" class="btn btn-primary mr-3" style="color:white">
+                    Add Product
                 </a>
                 <select name="Gender" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
                     <option value="Name">Name</option>
+                    <option value="Phone">Phone</option>
+                    <option value="Email">Email</option>
+                    <option value="Address">Address</option>
                 </select>
                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
@@ -24,10 +27,16 @@
     </div>
     <div class="card-body">
         <div class="">
+            <br />
             <table class="table table-bordered" id="tblData" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>On Sale</th>
+                        <th>Manufacturer</th>
+                        <th>Category</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -38,6 +47,6 @@
 
 @section Scripts{
     <script src="~/Assets/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/js/category.js"></script>
+    <script src="~/js/product.js"></script>
 }
 

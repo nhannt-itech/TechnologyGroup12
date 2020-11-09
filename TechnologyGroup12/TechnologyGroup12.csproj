@@ -26,4 +26,8 @@
     <ProjectReference Include="..\TechnologyGroup12.Utility\TechnologyGroup12.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\image\product\" />
+  </ItemGroup>
+
 </Project>

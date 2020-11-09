@@ -11,6 +11,7 @@ namespace TechnologyGroup12.Models.Models
         }
 
         public string Id { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public double DiscountValue { get; set; }
         public DateTime StartDate { get; set; }

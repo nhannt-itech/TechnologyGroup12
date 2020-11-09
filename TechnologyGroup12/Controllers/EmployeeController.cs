@@ -33,9 +33,8 @@ namespace TechnologyGroup12.Controllers
             lGender.Add("Others");
 
             var lJobPosition = _unitOfWork.SP_Call.List<JobPosition>("SP_GetAll_JobPosition");
-            EmployeeVM employeeVM = new EmployeeVM()
+            Employee employee = new Employee()
             {
-                Employee = new Employee(),
                 JobPositionList = lJobPosition.Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -46,37 +45,48 @@ namespace TechnologyGroup12.Controllers
                     Text = i,
                     Value = i
                 })
-        };
-
-            
-
+            };
             if (id == null)
             {
-                return View(employeeVM);
+                return View(employee);
             }
-            var parameters = new DynamicParameters();
-            parameters.Add("@Id", id);
-            employeeVM.Employee = _unitOfWork.SP_Call.OneRecord<Employee>("SP_Get_Employee", parameters);
-            return View(employeeVM);
+            else
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@Id", id);
+                employee = _unitOfWork.SP_Call.OneRecord<Employee>("SP_Get_Employee", parameters);
+                //Lúc này SelectList bị reset nên phải add vào lại
+                employee.GenderList = lGender.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i
+                });
+                employee.JobPositionList = lJobPosition.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                });
+                return View(employee);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(EmployeeVM employeeVM)
+        public IActionResult Upsert(Employee employee)
         {
-                    List<string> lGender = new List<string>();
+            List<string> lGender = new List<string>();
             lGender.Add("Male");
             lGender.Add("Female");
             lGender.Add("Others");
 
-            employeeVM.GenderList = lGender.Select(i => new SelectListItem
+            employee.GenderList = lGender.Select(i => new SelectListItem
             {
                 Text = i,
                 Value = i
             });
 
             var lJobPosition = _unitOfWork.SP_Call.List<JobPosition>("SP_GetAll_JobPosition");
-            employeeVM.JobPositionList = lJobPosition.Select(i => new SelectListItem
+            employee.JobPositionList = lJobPosition.Select(i => new SelectListItem
             {
                 Text = i.Name,
                 Value = i.Id.ToString()
@@ -84,27 +94,27 @@ namespace TechnologyGroup12.Controllers
             if (ModelState.IsValid)
             {
                 var parameter = new DynamicParameters();
-                parameter.Add("@Name", employeeVM.Employee.Name);
-                parameter.Add("@Birth", employeeVM.Employee.Birth);
-                parameter.Add("@Gender", employeeVM.Employee.Gender);
-                parameter.Add("@Phone", employeeVM.Employee.Phone);
-                parameter.Add("@Email", employeeVM.Employee.Email);
-                parameter.Add("@Address", employeeVM.Employee.Address);
-                parameter.Add("@JobPositionId", employeeVM.Employee.JobPositionId);
+                parameter.Add("@Name", employee.Name);
+                parameter.Add("@Birth", employee.Birth);
+                parameter.Add("@Gender", employee.Gender);
+                parameter.Add("@Phone", employee.Phone);
+                parameter.Add("@Email", employee.Email);
+                parameter.Add("@Address", employee.Address);
+                parameter.Add("@JobPositionId", employee.JobPositionId);
 
-                if (employeeVM.Employee.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
+                if (employee.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
                 {
                     _unitOfWork.SP_Call.Excute("SP_Create_Employee", parameter);
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    parameter.Add("@Id", employeeVM.Employee.Id);
+                    parameter.Add("@Id", employee.Id);
                     _unitOfWork.SP_Call.Excute("SP_Update_Employee", parameter);
-                    return View(employeeVM);
+                    return View(employee);
                 }
             }
-            return View(employeeVM);
+            return View(employee);
         }
 
 

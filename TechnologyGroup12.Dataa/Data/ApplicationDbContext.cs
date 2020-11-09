@@ -184,6 +184,10 @@ namespace TechnologyGroup12.DataAccess.Data
 
                 entity.Property(e => e.DiscountValue).HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
                 entity.Property(e => e.EndDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
@@ -291,8 +295,6 @@ namespace TechnologyGroup12.DataAccess.Data
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description).HasMaxLength(500);
-
-                entity.Property(e => e.Image).HasColumnType("image");
 
                 entity.Property(e => e.ModifyDate)
                     .HasColumnType("datetime")
