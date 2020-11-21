@@ -6,34 +6,35 @@ $(document).ready(function () {
 
 function loadDataTable() {
 
-    var idEmployee = document.getElementById("employeeId").value;
     dataTable = $("#tblData").DataTable(
         {
             "bPaginate": false,
             "bFilter": false,
             "bInfo": false,
             "ajax": {
-                "url": "/Dependents/GetAllDependentsOfEmployee/" + idEmployee
+                "url": "/Bill/GetAll"
             },
             "columns": [
-                { "data": "name", "width": "15%" },
-                { "data": "gender", "width": "15%" },
-                { "data": "phone", "width": "15%" },
-                { "data": "birth", "width": "15%" },
+                { "data": "id", "width": "15%" },
+                { "data": "customerName", "width": "15%" },
+                { "data": "employeeName", "width": "15%" },
+                { "data": "totalPriceBill", "width": "15%" },
+                { "data": "createDate", "width": "15%" },
+                { "data": "modifyDate", "width": "15%" },
                 {
                     "data": "id",
                     "render": function (data) {
                         return `
                             <div class="text-center">
-                                <a href="/Dependents/Update/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                <a href="/Bill/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a onclick=Delete("/Dependents/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                <a onclick=Delete("/Bill/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
                                     <i class="fas fa-trash-alt"></i> 
                                 </a>
                             </div>
                             `;
-                    }, "width": "15%"
+                    }, "width": "10%"
                 }
             ]
         })

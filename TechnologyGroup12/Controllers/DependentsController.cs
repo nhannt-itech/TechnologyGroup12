@@ -23,7 +23,7 @@ namespace TechnologyGroup12.Controllers
             Dependents dependents = new Dependents();
             var parameters = new DynamicParameters();
             parameters.Add("@Id", id);
-            dependents = _unitOfWork.SP_Call.OneRecord<Dependents>("SP_Get_Customer", parameters);
+            dependents = _unitOfWork.SP_Call.OneRecord<Dependents>("SP_Get_Dependents", parameters);
             return View("Upsert", dependents);
         }
         public IActionResult Insert(string? id)
@@ -75,20 +75,12 @@ namespace TechnologyGroup12.Controllers
             return Json(new { data = allObj.AsEnumerable() });
         }
 
-        public IActionResult GetJob(string? id)
-        {
-            var parameters = new DynamicParameters();
-            parameters.Add("@Id", id);
-            var Obj = _unitOfWork.SP_Call.OneRecord<Employee>("SP_Get_Employee", parameters);
-            return Json(new { data = Obj });
-        }
-
         [HttpDelete]
         public IActionResult Delete(string? id)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Employee", parameter);
+            _unitOfWork.SP_Call.Excute("SP_Delete_Dependents", parameter);
             return Json(new { success = true, message = "Delete successful!" });
         }
     }

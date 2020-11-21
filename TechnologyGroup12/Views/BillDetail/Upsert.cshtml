@@ -1,10 +1,10 @@
-﻿@model TechnologyGroup12.Models.Models.Dependents
+﻿@model TechnologyGroup12.Models.Models.BillDetail
 @{
-    var Title = "ADD DEPENDENTS";
+    var Title = "ADD BILL DETAIL";
 
     if (Model.Id.ToString() != "00000000-0000-0000-0000-000000000000")
     {
-        Title = "UPDATE DEPENDENTS";
+        Title = "UPDATE BILL DETAIL";
     }
 
     ViewData["Title"] = Title;
@@ -19,47 +19,48 @@
                 <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">@Title</h1>
                 </div>
-                <form asp-action="Upsert" method="post" class="user">
-
+                <form asp-action="Upsert" method="post">
                     <div class="row">
                         <div class="col-3 text-lg">
-                            <label>Employee Id:</label>
+                            <label>Bill Id:</label>
                         </div>
                         <div class="form-group col-9">
-                            <input asp-for="EmployeeId" type="text" class="form-control" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="Name" type="text" class="form-control" placeholder="Enter Your Name...">
-                    </div>
-                    <div class="row">
-                        <div class="col-3 text-lg">
-                            <label>Birthday:</label>
-                        </div>
-                        <div class="form-group col-9">
-                            <input asp-for="Birth" type="datetime-local" class="form-control" placeholder="Password">
+                            <input asp-for="BillId" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">
-                            <label>Gender:</label>
+                            Product:
                         </div>
                         <div class="form-group col-9">
-                            <select asp-for="Gender" name="Gender" class="form-control">
-                                <option value="Other">Other</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.ProductId, Model.ProductList, "-Select a Product",
+                           new { @class = "form-control" })
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input asp-for="Phone" type="text" class="form-control" placeholder="Enter Your Phone...">
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Quantity:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="Quantity" type="number" class="form-control">
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <input asp-for="Relationship" type="text" class="form-control" placeholder="Enter Your Address...">
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Total Price:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="TotalPrice" type="number" step="0.01" class="form-control" readonly>
+                        </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Discount:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="Discount" type="number" step="0.01" class="form-control" readonly>
+                        </div>
+                    </div>
 
                     @if (Model.Id.ToString() == "00000000-0000-0000-0000-000000000000")
                     {
@@ -73,7 +74,7 @@
                             Update
                         </button>
                     }
-                    <a asp-controller="Employee" asp-action="Upsert" asp-route-id="@Model.EmployeeId.ToString()" class="btn btn-warning btn-user btn-block">
+                    <a asp-controller="Bill" asp-action="Upsert" asp-route-id="@Model.BillId" class="btn btn-warning btn-user btn-block">
                         < Back To List
                     </a>
                 </form>
