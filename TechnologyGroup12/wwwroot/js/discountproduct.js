@@ -5,33 +5,28 @@ $(document).ready(function () {
 });
 
 function loadDataTable() {
-
+    var idDiscount = document.getElementById("discountId").value;
     dataTable = $("#tblData").DataTable(
         {
-            "bPaginate": true,
+            "bPaginate": false,
             "bFilter": false,
             "bInfo": false,
             "ajax": {
-                "url": "/JobPosition/GetAll"
+                "url": "/DiscountProduct/GetAllDiscountProductOfDiscount/" + idDiscount
             },
             "columns": [
-                { "data": "name", "width": "30%" },
-                { "data": "basicSalary", "width": "20%" },
-                { "data": "salary", "width": "20%" },
+                { "data": "productName", "width": "15%" },
                 {
-                    "data": "id",
+                    "data": "productId",
                     "render": function (data) {
                         return `
                             <div class="text-center">
-                                <a href="/JobPosition/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a onclick=Delete("/JobPosition/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                <a onclick="Delete('${idDiscount}', ${data})" class="btn btn-danger text-white" style="cursor:pointer">
                                     <i class="fas fa-trash-alt"></i> 
                                 </a>
                             </div>
                             `;
-                    }, "width": "30%"
+                    }, "width": "15%"
                 }
             ]
         })
@@ -44,7 +39,8 @@ const swalWithBootstrapButtons = Swal.mixin({
     },
     buttonsStyling: false
 })
-function Delete(url) {
+
+function Delete(discountId, productId) {
     swalWithBootstrapButtons.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -56,24 +52,19 @@ function Delete(url) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                type: "DELETE",
-                url: url,
+                url: '/DiscountProduct/Delete',
+                type: 'DELETE',
+                async: false,
+                dataType: 'text',
+                processData: false,
+                data: "discountId=" + discountId + "&productId=" + productId,
                 success: function (data) {
-                    if (data.success) {
-                        swalWithBootstrapButtons.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        );
-                        $('#tblData').DataTable().ajax.reload();
-                    }
-                    else {
-                        swalWithBootstrapButtons.fire(
-                            'Error',
-                            'Can not delete this, maybe it not exit or error from sever',
-                            'error'
-                        )
-                    }
+                    swalWithBootstrapButtons.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    );
+                    $('#tblData').DataTable().ajax.reload();
                 }
 
             })

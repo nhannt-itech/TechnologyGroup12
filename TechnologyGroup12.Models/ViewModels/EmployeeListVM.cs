@@ -13,6 +13,10 @@ namespace TechnologyGroup12.Models.ViewModels
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
+        public long? JobPositionId { get; set; }
         public string JobName { get; set; }
+        public int? YearEmployee { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime ModifyDate { get; set; }
     }
 }

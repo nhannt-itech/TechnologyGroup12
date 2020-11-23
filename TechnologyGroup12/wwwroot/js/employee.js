@@ -16,10 +16,49 @@ function loadDataTable() {
             },
             "columns": [
                 { "data": "name", "width": "15%" },
+                { "data": "gender", "width": "5%" },
                 { "data": "phone", "width": "15%" },
                 { "data": "email", "width": "15%" },
                 { "data": "address", "width": "20%" },
-                { "data": "jobName", "width": "20%" },
+                { "data": "jobName", "width": "10%" },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return `
+                            <div class="text-center">
+                                <a href="/Employee/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a onclick=Delete("/Employee/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </a>
+                            </div>
+                            `;
+                    }, "width": "15%"
+                }
+            ]
+        })
+}
+
+function SearchFor() {
+    var columnName = document.getElementById("columnName").value;
+    var searchFor = document.getElementById("searchFor").value;
+    $("#tblData").dataTable().fnDestroy();
+    dataTable = $("#tblData").DataTable(
+        {
+            "bPaginate": false,
+            "bFilter": false,
+            "bInfo": false,
+            "ajax": {
+                "url": "/Employee/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor,
+            },
+            "columns": [
+                { "data": "name", "width": "15%" },
+                { "data": "gender", "width": "5%" },
+                { "data": "phone", "width": "15%" },
+                { "data": "email", "width": "15%" },
+                { "data": "address", "width": "20%" },
+                { "data": "jobName", "width": "10%" },
                 {
                     "data": "id",
                     "render": function (data) {

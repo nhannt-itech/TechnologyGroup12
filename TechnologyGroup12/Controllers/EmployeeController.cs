@@ -125,6 +125,16 @@ namespace TechnologyGroup12.Controllers
             return Json(new { data = allObj.AsEnumerable() });
         }
 
+        [HttpGet]
+        public IActionResult SearchFor(string columnName, string searchFor)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@ColumnName", columnName);
+            parameter.Add("@SearchFor", searchFor);
+            var allObj = _unitOfWork.SP_Call.List<EmployeeListVM>("SP_Search_Employee", parameter);
+            return Json(new { data = allObj.AsEnumerable() });
+        }
+
         public IActionResult GetJob(string? id)
         {
             var parameters = new DynamicParameters();

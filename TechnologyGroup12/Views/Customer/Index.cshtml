@@ -1,24 +1,25 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="card shadow mb-4">
+<div class="card shadow mb-4 bg-gray-100">
     <div class="card-header py-2">
+        <a asp-controller="Customer" asp-action="Upsert" type="submit" class="float-lg-right btn btn-info ml-2" style="color:white">
+            <i class="fas fa-plus fa-sm"></i>
+            Add Customer
+        </a>
         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right">
             <div class="input-group">
-                <a asp-controller="Customer" asp-action="Upsert" type="submit" class="btn btn-primary mr-3" style="color:white">
-                    Add Customer
-                </a>
-                <select name="Gender" class="form-control bg-light border-0 small" aria-label="Search" aria-describedby="basic-addon2">
+                <select id="columnName" name="columnName" class="form-control bg-light small" aria-label="Search" aria-describedby="basic-addon2">
+                    <option value="">...Find For</option>
                     <option value="Name">Name</option>
                     <option value="Phone">Phone</option>
                     <option value="Email">Email</option>
                     <option value="Address">Address</option>
                 </select>
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                <input id="searchFor" type="text" class="form-control small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
+                    <button class="btn btn-info" onclick="SearchFor()" type="button">
                         <i class="fas fa-search fa-sm"></i>
                     </button>
                 </div>
@@ -27,8 +28,7 @@
     </div>
     <div class="card-body">
         <div class="">
-            <br />
-            <table class="table table-bordered" id="tblData" width="100%" cellspacing="0">
+            <table class="table-bordered border-dark text-gray-900" id="tblData" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Name</th>

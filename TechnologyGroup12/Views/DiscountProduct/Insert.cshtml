@@ -1,0 +1,45 @@
+﻿@model TechnologyGroup12.Models.Models.DiscountProduct
+@{
+    var Title = "ADD PRODUCT IN DISCOUNT";
+
+    ViewData["Title"] = Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="offset-3 col-lg-6 ">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">@Title</h1>
+                </div>
+                <form asp-action="Insert" method="post" class="user">
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Discount Id:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="DiscountId" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            Product:
+                        </div>
+                        <div class="form-group col-9">
+                            @Html.DropDownListFor(m => m.ProductId, Model.ProductList, "-Select a Product",
+                           new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                        Add
+                    </button>
+                    <a asp-controller="Discount" asp-action="Upsert" asp-route-id="@Model.DiscountId" class="btn btn-warning btn-user btn-block">
+                        < Back To List
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

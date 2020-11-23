@@ -5,7 +5,6 @@ $(document).ready(function () {
 });
 
 function loadDataTable() {
-
     dataTable = $("#tblData").DataTable(
         {
             "bPaginate": false,
@@ -37,7 +36,7 @@ function loadDataTable() {
                     }, "width": "10%"
                 }
             ]
-        })
+        });
 }
 
 const swalWithBootstrapButtons = Swal.mixin({
