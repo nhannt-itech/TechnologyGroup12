@@ -16,6 +16,44 @@ function loadDataTable() {
             },
             "columns": [
                 { "data": "name", "width": "25%" },
+                { "data": "numberInStock", "width": "5%" },
+                { "data": "price", "width": "15%" },
+                { "data": "onSale", "width": "10%" },
+                { "data": "manufacturerName", "width": "15%" },
+                { "data": "categoryName", "width": "15%" },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return `
+                            <div class="text-center">
+                                <a href="/Product/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a onclick=Delete("/Product/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </a>
+                            </div>
+                            `;
+                    }, "width": "10%"
+                }
+            ]
+        })
+}
+
+function SearchFor() {
+    var columnName = document.getElementById("columnName").value;
+    var searchFor = document.getElementById("searchFor").value;
+    $("#tblData").dataTable().fnDestroy();
+    $("#tblData").DataTable(
+        {
+            "bPaginate": true,
+            "bFilter": false,
+            "bInfo": false,
+            "ajax": {
+                "url": "/Product/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor,
+            },
+            "columns": [
+                { "data": "name", "width": "25%" },
                 { "data": "numberInStock", "width": "10%" },
                 { "data": "price", "width": "15%" },
                 { "data": "onSale", "width": "10%" },

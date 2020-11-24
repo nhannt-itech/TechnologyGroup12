@@ -35,6 +35,39 @@ function loadDataTable() {
         })
 }
 
+function SearchFor() {
+    var columnName = document.getElementById("columnName").value;
+    var searchFor = document.getElementById("searchFor").value;
+    $("#tblData").dataTable().fnDestroy();
+    $("#tblData").DataTable(
+        {
+            "bPaginate": true,
+            "bFilter": false,
+            "bInfo": false,
+            "ajax": {
+                "url": "/Category/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor,
+            },
+            "columns": [
+                { "data": "name", "width": "70%" },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return `
+                            <div class="text-center">
+                                <a href="/Category/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a onclick=Delete("/Category/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </a>
+                            </div>
+                            `;
+                    }, "width": "30%"
+                }
+            ]
+        })
+}
+
 const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
         confirmButton: 'btn btn-success',

@@ -15,9 +15,10 @@ function loadDataTable() {
             },
             "columns": [
                 { "data": "name", "width": "15%" },
+                { "data": "gender", "width": "10%" },
                 { "data": "phone", "width": "15%" },
                 { "data": "email", "width": "15%" },
-                { "data": "address", "width": "30%" },
+                { "data": "address", "width": "25%" },
                 {
                     "data": {
                         isVip: "isVip"
@@ -53,7 +54,7 @@ function loadDataTable() {
                                 </a>
                             </div>
                             `;
-                    }, "width": "10%"
+                    }, "width": "15%"
                 }
             ]
         })
@@ -73,9 +74,10 @@ function SearchFor() {
             },
             "columns": [
                 { "data": "name", "width": "15%" },
+                { "data": "gender", "width": "10%" },
                 { "data": "phone", "width": "15%" },
                 { "data": "email", "width": "15%" },
-                { "data": "address", "width": "30%" },
+                { "data": "address", "width": "25%" },
                 {
                     "data": {
                         isVip: "isVip"
@@ -111,7 +113,7 @@ function SearchFor() {
                                 </a>
                             </div>
                             `;
-                    }, "width": "10%"
+                    }, "width": "15%"
                 }
             ]
         })

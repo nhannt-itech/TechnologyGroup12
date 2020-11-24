@@ -8,7 +8,7 @@ function loadDataTable() {
 
     dataTable = $("#tblData").DataTable(
         {
-            "bPaginate": false,
+            "bPaginate": true,
             "bFilter": false,
             "bInfo": false,
             "ajax": {
@@ -50,7 +50,7 @@ function SearchFor() {
             "bFilter": false,
             "bInfo": false,
             "ajax": {
-                "url": "/Employee/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor,
+                "url": "/Employee/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor
             },
             "columns": [
                 { "data": "name", "width": "15%" },

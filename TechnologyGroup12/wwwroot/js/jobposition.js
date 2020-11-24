@@ -37,6 +37,41 @@ function loadDataTable() {
         })
 }
 
+function SearchFor() {
+    var columnName = document.getElementById("columnName").value;
+    var searchFor = document.getElementById("searchFor").value;
+    $("#tblData").dataTable().fnDestroy();
+    dataTable = $("#tblData").DataTable(
+        {
+            "bPaginate": false,
+            "bFilter": false,
+            "bInfo": false,
+            "ajax": {
+                "url": "/JobPosition/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor
+            },
+            "columns": [
+                { "data": "name", "width": "30%" },
+                { "data": "basicSalary", "width": "20%" },
+                { "data": "salary", "width": "20%" },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return `
+                            <div class="text-center">
+                                <a href="/JobPosition/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a onclick=Delete("/JobPosition/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </a>
+                            </div>
+                            `;
+                    }, "width": "30%"
+                }
+            ]
+        })
+}
+
 const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
         confirmButton: 'btn btn-success',
