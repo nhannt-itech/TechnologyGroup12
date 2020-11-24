@@ -7,7 +7,7 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $("#tblData").DataTable(
         {
-            "bPaginate": false,
+            "bPaginate": true,
             "bFilter": false,
             "bInfo": false,
             "ajax": {
@@ -37,6 +37,44 @@ function loadDataTable() {
                 }
             ]
         });
+}
+
+function SearchFor() {
+    var columnName = document.getElementById("columnName").value;
+    var searchFor = document.getElementById("searchFor").value;
+    $("#tblData").dataTable().fnDestroy();
+    $("#tblData").DataTable(
+        {
+            "bPaginate": true,
+            "bFilter": false,
+            "bInfo": false,
+            "ajax": {
+                "url": "/Bill/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor,
+            },
+            "columns": [
+                { "data": "id", "width": "15%" },
+                { "data": "customerName", "width": "15%" },
+                { "data": "employeeName", "width": "15%" },
+                { "data": "totalPriceBill", "width": "15%" },
+                { "data": "createDate", "width": "15%" },
+                { "data": "modifyDate", "width": "15%" },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return `
+                            <div class="text-center">
+                                <a href="/Bill/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a onclick=Delete("/Bill/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </a>
+                            </div>
+                            `;
+                    }, "width": "10%"
+                }
+            ]
+        })
 }
 
 const swalWithBootstrapButtons = Swal.mixin({

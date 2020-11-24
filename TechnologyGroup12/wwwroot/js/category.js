@@ -8,7 +8,7 @@ function loadDataTable() {
 
     dataTable = $("#tblData").DataTable(
         {
-            "bPaginate": false,
+            "bPaginate": true,
             "bFilter": false,
             "bInfo": false,
             "ajax": {

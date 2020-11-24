@@ -8,11 +8,48 @@ function loadDataTable() {
 
     dataTable = $("#tblData").DataTable(
         {
-            "bPaginate": false,
+            "bPaginate": true,
             "bFilter": false,
             "bInfo": false,
             "ajax": {
                 "url": "/Discount/GetAll"
+            },
+            "columns": [
+                { "data": "id", "width": "15%" },
+                { "data": "name", "width": "15%" },
+                { "data": "discountValue", "width": "15%" },
+                { "data": "startDate", "width": "15%" },
+                { "data": "endDate", "width": "15%" },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return `
+                            <div class="text-center">
+                                <a href="/Discount/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a onclick=Delete("/Discount/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
+                                    <i class="fas fa-trash-alt"></i> 
+                                </a>
+                            </div>
+                            `;
+                    }, "width": "25%"
+                }
+            ]
+        })
+}
+
+function SearchFor() {
+    var columnName = document.getElementById("columnName").value;
+    var searchFor = document.getElementById("searchFor").value;
+    $("#tblData").dataTable().fnDestroy();
+    $("#tblData").DataTable(
+        {
+            "bPaginate": true,
+            "bFilter": false,
+            "bInfo": false,
+            "ajax": {
+                "url": "/Discount/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor,
             },
             "columns": [
                 { "data": "id", "width": "15%" },

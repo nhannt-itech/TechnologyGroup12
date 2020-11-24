@@ -8,7 +8,7 @@ function loadDataTable() {
     var idDiscount = document.getElementById("discountId").value;
     dataTable = $("#tblData").DataTable(
         {
-            "bPaginate": false,
+            "bPaginate": true,
             "bFilter": false,
             "bInfo": false,
             "ajax": {

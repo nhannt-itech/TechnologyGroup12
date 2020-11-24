@@ -77,6 +77,16 @@ namespace TechnologyGroup12.Controllers
             return Json(new { data = allObj.AsEnumerable() });
         }
 
+        [HttpGet]
+        public IActionResult SearchFor(string columnName, string searchFor)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@ColumnName", columnName);
+            parameter.Add("@SearchFor", searchFor);
+            var allObj = _unitOfWork.SP_Call.List<Discount>("SP_Search_Discount", parameter);
+            return Json(new { data = allObj.AsEnumerable() });
+        }
+
         [HttpDelete]
         public IActionResult Delete(string? id)
         {
