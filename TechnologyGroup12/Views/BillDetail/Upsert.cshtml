@@ -36,6 +36,7 @@
                             @Html.DropDownListFor(m => m.ProductId, Model.ProductList, "-Select a Product",
                            new { @class = "form-control" })
                         </div>
+                        <span asp-validation-for="ProductId" class="text-danger offset-1"></span>
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechnologyGroup12.Models.Models
@@ -15,12 +16,17 @@ namespace TechnologyGroup12.Models.Models
         }
 
         public Guid Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public DateTime Birth { get; set; }
         public string Gender { get; set; }
+        [Required]
         public string Phone { get; set; }
+        [Required]
         public string Email { get; set; }
         public string Address { get; set; }
+        [Required]
         public long? JobPositionId { get; set; }
         public int? YearEmployee { get; set; }
         public DateTime CreateDate { get; set; }

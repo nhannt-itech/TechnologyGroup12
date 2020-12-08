@@ -15,7 +15,7 @@ namespace TechnologyGroup12.Controllers
 
         public CustomerController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;  
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
@@ -37,7 +37,6 @@ namespace TechnologyGroup12.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Upsert(Customer customer)
         {
             if (ModelState.IsValid)
@@ -92,6 +91,22 @@ namespace TechnologyGroup12.Controllers
             return Json(new { success = true, message = "Delete successful!" });
         }
 
+        #region ErrorValidationModel
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult CheckNullName(string Name)
+        {
+            if (Name == null) Name = "";
+            bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckNull( @Text )",new object[] { Name });
+            return Json(check);
+        }
 
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult CheckEmail(string Email)
+        {
+            if (Email == null) Email = "";
+            bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckEmail( @Email )", new object[] { Email });
+            return Json(check);
+        }
+        #endregion
     }
 }

@@ -31,6 +31,8 @@
                             @Html.DropDownListFor(m => m.CustomerId, Model.CustomerList, "-Select a Customer",
                            new { @class = "form-control" })
                         </div>
+                        <span asp-validation-for="CustomerId" class="text-danger offset-1"></span>
+
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">
@@ -40,6 +42,7 @@
                             @Html.DropDownListFor(m => m.EmployeeId, Model.EmployeeList, "-Select an Employee",
                            new { @class = "form-control" })
                         </div>
+                        <span asp-validation-for="EmployeeId" class="text-danger offset-1"></span>
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">

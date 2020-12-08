@@ -151,5 +151,19 @@ namespace TechnologyGroup12.Controllers
             _unitOfWork.SP_Call.Excute("SP_Delete_Employee", parameter);
             return Json(new { success = true, message = "Delete successful!" });
         }
+
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult CheckAge(DateTime Birth)
+        {
+            bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckAge( @Birth )", new object[] { Birth });
+            return Json(check);
+        }
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult CheckEmail(string Email)
+        {
+            if (Email == null) Email = "";
+            bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckEmail( @Email )", new object[] { Email });
+            return Json(check);
+        }
     }
 }

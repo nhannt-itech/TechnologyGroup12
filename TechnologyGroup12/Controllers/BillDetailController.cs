@@ -23,17 +23,15 @@ namespace TechnologyGroup12.Controllers
         public IActionResult Update(string? id)
         {
             var lProduct = _unitOfWork.SP_Call.List<Product>("SP_GetAll_Product");
-            BillDetail billDetails = new BillDetail()
-            {
-                ProductList = lProduct.Select(i => new SelectListItem
-                {
-                    Text = i.Name,
-                    Value = i.Id.ToString()
-                })
-            };
+            BillDetail billDetails = new BillDetail();
             var parameters = new DynamicParameters();
             parameters.Add("@Id", id);
             billDetails = _unitOfWork.SP_Call.OneRecord<BillDetail>("SP_Get_BillDetail", parameters);
+            billDetails.ProductList = lProduct.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
             return View("Upsert", billDetails);
         }
         public IActionResult Insert(long? id)

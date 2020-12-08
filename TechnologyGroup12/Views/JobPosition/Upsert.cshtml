@@ -24,6 +24,7 @@
                 <form method="post" class="user">
                     <div class="form-group">
                         <input asp-for="Name" type="text" class="form-control" placeholder="Enter Job  Name...">
+                        <span asp-validation-for="Name" class="text-danger offset-1"></span>
                     </div>
 
                     <div class="row">
@@ -32,6 +33,7 @@
                         </div>
                         <div class="form-group col-8">
                             <input asp-for="BasicSalary" type="number" class="form-control" placeholder="Enter Basic Salary...">
+                            <span asp-validation-for="BasicSalary" class="text-danger offset-1"></span>
                         </div>
                     </div>
                     <div class="row">

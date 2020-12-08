@@ -19,9 +19,10 @@
                 <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">@Title</h1>
                 </div>
-                <form method="post" class="user">
+                <form asp-controller="Customer" asp-action="Upsert" method="post" class="user">
                     <div class="form-group">
                         <input asp-for="Name" type="text" class="form-control" placeholder="Enter Your Name...">
+                        <span asp-validation-for="Name" class="text-danger offset-1"></span>
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">
@@ -29,6 +30,7 @@
                         </div>
                         <div class="form-group col-9">
                             <input asp-for="Birth" type="datetime-local" class="form-control" placeholder="Password">
+                            <span asp-validation-for="Birth" class="text-danger offset-1"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -45,9 +47,14 @@
                     </div>
                     <div class="form-group">
                         <input asp-for="Phone" type="text" class="form-control" placeholder="Enter Your Phone...">
+                        <span asp-validation-for="Phone" class="text-danger offset-1"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="Email" type="text" class="form-control" placeholder="Enter Your Email...">
+                        <input asp-for="Email" type="text" class="form-control" placeholder="Enter Your Email..."
+                               data-val="true" data-val-remote="Email is Invalid."
+                               data-val-remote-additionalfields="*.Email" data-val-remote-url="/Customer/CheckEmail"
+                               id="Email" name="Email" value="">
+                        <span asp-validation-for="Email" class="text-danger offset-1"></span>
                     </div>
                     <div class="form-group">
                         <input asp-for="Address" type="text" class="form-control" placeholder="Enter Your Address...">
@@ -80,12 +87,4 @@
         </div>
     </div>
 </div>
-
-@*<hr>
-    <a href="index.html" class="btn btn-google btn-user btn-block">
-        <i class="fab fa-google fa-fw"></i> Login with Google
-    </a>
-    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-    </a>*@
 

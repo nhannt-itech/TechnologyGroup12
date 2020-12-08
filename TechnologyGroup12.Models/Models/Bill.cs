@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechnologyGroup12.Models.Models
@@ -13,7 +14,9 @@ namespace TechnologyGroup12.Models.Models
         }
 
         public long Id { get; set; }
+        [Required]
         public Guid? CustomerId { get; set; }
+        [Required]
         public Guid? EmployeeId { get; set; }
         public double TotalPriceBill { get; set; }
         public DateTime CreateDate { get; set; }

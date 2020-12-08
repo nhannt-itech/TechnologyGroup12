@@ -29,6 +29,7 @@
                         <div class="form-group col-9">
                             @Html.DropDownListFor(m => m.ProductId, Model.ProductList, "-Select a Product",
                            new { @class = "form-control" })
+                            <span asp-validation-for="ProductId" class="text-danger offset-1"></span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">

@@ -12,7 +12,6 @@
 }
 
 
-
 <div class="container">
     <!-- Nested Row within Card Body -->
     <div class="row">
@@ -24,6 +23,7 @@
                 <form method="post" class="user">
                     <div class="form-group">
                         <input asp-for="Name" type="text" class="form-control" placeholder="Enter Job  Name...">
+                        <span asp-validation-for="Name" class="text-danger offset-1"></span>
                     </div>
                     
                     <div class="row">
@@ -283,19 +283,21 @@
                     </div>
                     <div class="form-group">
                         <input asp-for="Phone" type="text" class="form-control" placeholder="Enter Job  Phone...">
+                        <span asp-validation-for="Phone" class="text-danger offset-1"></span>
                     </div>
                     <div class="form-group">
-                        <input asp-for="Email" type="text" class="form-control" placeholder="Enter Job  Email...">
+                        <input asp-for="Email" type="text" class="form-control" placeholder="Enter Job  Email..."
+                               data-val="true" data-val-remote="Email is Invalid."
+                               data-val-remote-additionalfields="*.Email" data-val-remote-url="/Manufacturer/CheckEmail"
+                               id="Email" name="Email" value="">
+                        <span asp-validation-for="Email" class="text-danger offset-1"></span>
                     </div>
-
-
 
                     @if (Model.Id == 0)
                     {
                         <button type="submit" class="btn btn-primary btn-user btn-block">
                             Add
                         </button>
-
                     }
                     else
                     {

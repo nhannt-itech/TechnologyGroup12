@@ -10,6 +10,7 @@ namespace TechnologyGroup12.DataAccess.Repository.IRepository
         T Single<T>(string proceduceName, DynamicParameters param = null);
         void Excute(string proceduceName, DynamicParameters param = null);
         T OneRecord<T>(string proceduceName, DynamicParameters param = null);
+        public T ExecuteScalar<T>(string query, object[] parameter = null);
         IEnumerable<T> List<T>(string proceduceName, DynamicParameters param = null);
         Tuple<IEnumerable<T1>, IEnumerable<T2>> List<T1, T2>(string proceduceName, DynamicParameters param = null);
     }

@@ -82,7 +82,6 @@ namespace TechnologyGroup12.Controllers
             return Json(new { data = allObj.AsEnumerable() });
         }
 
-
         [HttpDelete]
         public IActionResult Delete(long? id)
         {
@@ -90,6 +89,14 @@ namespace TechnologyGroup12.Controllers
             parameter.Add("@Id", id);
             _unitOfWork.SP_Call.Excute("SP_Delete_Category", parameter);
             return Json(new { success = true, message = "Delete successful!" });
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult CheckEmail(string Email)
+        {
+            if (Email == null) Email = "";
+            bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckEmail( @Email )", new object[] { Email });
+            return Json(check);
         }
     }
 }

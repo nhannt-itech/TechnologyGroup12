@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TechnologyGroup12.Models.Models
 {
@@ -11,9 +12,12 @@ namespace TechnologyGroup12.Models.Models
         }
 
         public long Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public string Nation { get; set; }
+        [Required]
         public int Phone { get; set; }
+        [Required]
         public string Email { get; set; }
         public virtual ICollection<Product> Product { get; set; }
     }
