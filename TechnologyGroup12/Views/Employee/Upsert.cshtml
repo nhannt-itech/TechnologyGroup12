@@ -20,6 +20,7 @@
                     <h1 class="h4 text-gray-900 mb-4">@Title</h1>
                 </div>
                 <form method="post" class="user">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <input id="employeeId" asp-for="Id" type="text" class="form-control" placeholder="Enter Your Name..." hidden>
                     </div>
@@ -33,9 +34,9 @@
                         </div>
                         <div class="form-group col-9">
                             <input asp-for="Birth" type="datetime-local" class="form-control"
-                                   data-val="true" data-val-remote="Email is Invalid."
+                                   data-val="true" data-val-remote="Employee must be over 18 years."
                                    data-val-remote-additionalfields="*.Birth" data-val-remote-url="/Employee/CheckAge"
-                                   id="Birth" name="Birth" value="@DateTime.Now">
+                                   id="Birth" name="Birth">
                             <span asp-validation-for="Birth" class="text-danger offset-1"></span>
                         </div>
                     </div>

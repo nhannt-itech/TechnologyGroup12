@@ -20,12 +20,13 @@
                     <h1 class="h4 text-gray-900 mb-4">@Title</h1>
                 </div>
                 <form method="post" class="user">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <input asp-for="Id" id="discountId" type="text" class="form-control" placeholder="Enter Code...">
                     </div>
                     <div class="form-group">
                         <input asp-for="Name" type="text" class="form-control" placeholder="Enter Name...">
-                        <span asp-validation-for="Name" class="text-danger offset-1"></span>
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input asp-for="Description" type="text" class="form-control" placeholder="Enter Description...">
@@ -36,6 +37,7 @@
                         </div>
                         <div class="form-group col-9">
                             <input asp-for="DiscountValue" type="number" class="form-control" placeholder="Enter Discount Value...">
+                            <span asp-validation-for="DiscountValue" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -43,8 +45,8 @@
                             <label>Start:</label>
                         </div>
                         <div class="form-group col-9">
-                            <input asp-for="StartDate" type="datetime-local" class="form-control">
-                            <span asp-validation-for="StartDate" class="text-danger offset-1"></span>
+                            <input asp-for="StartDate" type="datetime-local" class="form-control">                       
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -53,7 +55,7 @@
                         </div>
                         <div class="form-group col-9">
                             <input asp-for="EndDate" type="datetime-local" class="form-control">
-                            <span asp-validation-for="EndDate" class="text-danger offset-1"></span>
+                            <span asp-validation-for="EndDate" class="text-danger" ></span>
                         </div>
                     </div>
 

@@ -39,6 +39,7 @@ namespace TechnologyGroup12.Controllers
             var lProduct = _unitOfWork.SP_Call.List<Product>("SP_GetAll_Product");
             BillDetail billDetails = new BillDetail()
             {
+                Id = Guid.Parse("00000000-0000-0000-0000-000000000000"),
                 BillId = id, //id của Bill
                 ProductList = lProduct.Select(i => new SelectListItem
                 {
@@ -67,18 +68,26 @@ namespace TechnologyGroup12.Controllers
                 parameter.Add("@Quantity", billDetail.Quantity);
                 parameter.Add("@BillId", billDetail.BillId);
 
-
-                if (billDetail.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
+                try
                 {
-                    _unitOfWork.SP_Call.Excute("SP_Create_BillDetail", parameter);
-                    return RedirectToAction("Upsert", "Bill", new { id = billDetail.BillId.ToString() });
+                    if (billDetail.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
+                    {
+                        _unitOfWork.SP_Call.Excute("SP_Create_BillDetail", parameter);
+                        return RedirectToAction("Upsert", "Bill", new { id = billDetail.BillId.ToString() });
+                    }
+                    else
+                    {
+                        parameter.Add("@Id", billDetail.Id);
+                        _unitOfWork.SP_Call.Excute("SP_Update_BillDetail", parameter);
+                        return View(billDetail);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    parameter.Add("@Id", billDetail.Id);
-                    _unitOfWork.SP_Call.Excute("SP_Update_BillDetails", parameter);
+                    ModelState.AddModelError(string.Empty, ex.Message.
+                        Replace("The transaction ended in the trigger. The batch has been aborted", ""));
                     return View(billDetail);
-                }
+                }    
             }
             return View(billDetail);
         }

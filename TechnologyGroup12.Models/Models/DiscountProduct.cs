@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,7 @@ namespace TechnologyGroup12.Models.Models
     {
         public string DiscountId { get; set; }
         [Required]
+        [Remote("CheckProductNotDiscount", "DiscountProduct", ErrorMessage = "Product Is In Discount Today")]
         public long ProductId { get; set; }
         public virtual Discount Discount { get; set; }
         public virtual Product Product { get; set; }

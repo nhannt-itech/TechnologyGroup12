@@ -22,6 +22,7 @@
                     <h1 class="h4 text-gray-900 mb-4">@Title</h1>
                 </div>
                 <form method="post" class="user">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <input asp-for="Name" type="text" class="form-control" placeholder="Enter Category Name...">
                         <span asp-validation-for="Name" class="text-danger offset-1"></span>

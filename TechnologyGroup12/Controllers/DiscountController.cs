@@ -29,6 +29,8 @@ namespace TechnologyGroup12.Controllers
             Discount discount = new Discount();
             if (id == null)
             {
+                discount.StartDate = DateTime.Now;
+                discount.EndDate = DateTime.Now;
                 return View(discount);
             }
             var parameters = new DynamicParameters();
@@ -94,6 +96,28 @@ namespace TechnologyGroup12.Controllers
             parameter.Add("@Id", id);
             _unitOfWork.SP_Call.Excute("SP_Delete_Discount", parameter);
             return Json(new { success = true, message = "Delete successful!" });
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult CheckLimitDiscount(float DiscountValue)
+        {
+            bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckLimitDicount( @DiscountValue )", new object[] { DiscountValue });
+            return Json(check);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult CheckDateDiscount(DateTime StartDate, DateTime EndDate)
+        {
+            bool check;
+            try
+            {
+                check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckDateDiscount( @StartDate , @EndDate )", new object[] { StartDate, EndDate });
+            }
+            catch
+            {
+                check = false;
+            }
+            return Json(check);
         }
     }
 }

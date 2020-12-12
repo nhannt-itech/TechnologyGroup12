@@ -20,7 +20,7 @@
                     <h1 class="h4 text-gray-900 mb-4">@Title</h1>
                 </div>
                 <form asp-action="Upsert" method="post" class="user">
-
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
                         <div class="col-3 text-lg">
                             <label>Employee Id:</label>

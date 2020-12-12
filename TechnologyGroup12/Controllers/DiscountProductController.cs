@@ -77,5 +77,12 @@ namespace TechnologyGroup12.Controllers
             _unitOfWork.SP_Call.Excute("SP_Delete_Discount_Product", parameter);
             return Json(new { success = true, message = "Delete successful!" });
         }
+
+        [AcceptVerbs("Get", "Post")]
+        public JsonResult CheckProductNotDiscount(long ProductId)
+        {
+            bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckProduct_NotDiscount( @ProductId )", new object[] { ProductId });
+            return Json(check);
+        }
     }
 }

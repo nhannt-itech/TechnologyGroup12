@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -48,6 +49,7 @@ namespace TechnologyGroup12.Controllers
             };
             if (id == null)
             {
+                employee.Birth = DateTime.Now;
                 return View(employee);
             }
             else
@@ -91,17 +93,16 @@ namespace TechnologyGroup12.Controllers
                 Text = i.Name,
                 Value = i.Id.ToString()
             });
-            if (ModelState.IsValid)
+            var parameter = new DynamicParameters();
+            parameter.Add("@Name", employee.Name);
+            parameter.Add("@Birth", employee.Birth);
+            parameter.Add("@Gender", employee.Gender);
+            parameter.Add("@Phone", employee.Phone);
+            parameter.Add("@Email", employee.Email);
+            parameter.Add("@Address", employee.Address);
+            parameter.Add("@JobPositionId", employee.JobPositionId);
+            try
             {
-                var parameter = new DynamicParameters();
-                parameter.Add("@Name", employee.Name);
-                parameter.Add("@Birth", employee.Birth);
-                parameter.Add("@Gender", employee.Gender);
-                parameter.Add("@Phone", employee.Phone);
-                parameter.Add("@Email", employee.Email);
-                parameter.Add("@Address", employee.Address);
-                parameter.Add("@JobPositionId", employee.JobPositionId);
-
                 if (employee.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
                 {
                     _unitOfWork.SP_Call.Excute("SP_Create_Employee", parameter);
@@ -114,7 +115,12 @@ namespace TechnologyGroup12.Controllers
                     return View(employee);
                 }
             }
-            return View(employee);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message.
+                    Replace("The transaction ended in the trigger. The batch has been aborted",""));
+                return View(employee);
+            }
         }
 
 
@@ -155,8 +161,15 @@ namespace TechnologyGroup12.Controllers
         [AcceptVerbs("Get", "Post")]
         public JsonResult CheckAge(DateTime Birth)
         {
-            bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckAge( @Birth )", new object[] { Birth });
-            return Json(check);
+            try
+            {
+                bool check = _unitOfWork.SP_Call.ExecuteScalar<bool>(@"SELECT dbo.FUNC_CheckAge( @Birth )", new object[] { Birth });
+                return Json(check);
+            }
+            catch
+            {
+                return Json(0);
+            }
         }
         [AcceptVerbs("Get", "Post")]
         public JsonResult CheckEmail(string Email)

@@ -20,6 +20,13 @@
                     <h1 class="h4 text-gray-900 mb-4">@Title</h1>
                 </div>
                 <form asp-action="Upsert" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @if (Title == "UPDATE BILL DETAIL")
+                    {
+                        <div class="form-group col-9">
+                            <input asp-for="@Model.Id" type="text" class="form-control" hidden>
+                        </div>
+                    }
                     <div class="row">
                         <div class="col-3 text-lg">
                             <label>Bill Id:</label>
