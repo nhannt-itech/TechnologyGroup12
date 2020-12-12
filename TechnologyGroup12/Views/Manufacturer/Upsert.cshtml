@@ -22,9 +22,15 @@
                 </div>
                 <form method="post" class="user">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <input asp-for="Name" type="text" class="form-control" placeholder="Enter Job  Name...">
-                        <span asp-validation-for="Name" class="text-danger offset-1"></span>
+                    <input asp-for="Id" type="text" class="form-control" hidden readonly>
+                    <div class="row">
+                        <div class="col-4 text-lg">
+                            <label>Name:</label>
+                        </div>
+                        <div class="form-group col-8">
+                            <input asp-for="Name" type="text" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -282,16 +288,26 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input asp-for="Phone" type="text" class="form-control" placeholder="Enter Job  Phone...">
-                        <span asp-validation-for="Phone" class="text-danger offset-1"></span>
+                    <div class="row">
+                        <div class="col-4 text-lg">
+                            <label>Phone:</label>
+                        </div>
+                        <div class="form-group col-8">
+                            <input asp-for="Phone" type="text" class="form-control">
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input asp-for="Email" type="text" class="form-control" placeholder="Enter Job  Email..."
-                               data-val="true" data-val-remote="Email is Invalid."
-                               data-val-remote-additionalfields="*.Email" data-val-remote-url="/Manufacturer/CheckEmail"
-                               id="Email" name="Email" value="">
-                        <span asp-validation-for="Email" class="text-danger offset-1"></span>
+                    <div class="row">
+                        <div class="col-4 text-lg">
+                            <label>Email:</label>
+                        </div>
+                        <div class="form-group col-8">
+                            <input asp-for="Email" type="text" class="form-control"
+                                   data-val="true" data-val-remote="Email is Invalid."
+                                   data-val-remote-additionalfields="*.Email" data-val-remote-url="/Manufacturer/CheckEmail"
+                                   id="Email" name="Email" value="">
+                            <span asp-validation-for="Email" class="text-danger offset-1"></span>
+                        </div>
                     </div>
 
                     @if (Model.Id == 0)

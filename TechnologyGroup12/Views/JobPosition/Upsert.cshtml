@@ -23,18 +23,22 @@
                 </div>
                 <form method="post" class="user">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <input asp-for="Name" type="text" class="form-control" placeholder="Enter Job  Name...">
-                        <span asp-validation-for="Name" class="text-danger offset-1"></span>
+                    <div class="row">
+                        <div class="col-4 text-lg">
+                            <label>Name: </label>
+                        </div>
+                        <div class="form-group col-8">
+                            <input asp-for="Name" type="text" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
                     </div>
-
                     <div class="row">
                         <div class="col-4 text-lg">
                             <label>Basic Salary:</label>
                         </div>
                         <div class="form-group col-8">
-                            <input asp-for="BasicSalary" type="number" class="form-control" placeholder="Enter Basic Salary...">
-                            <span asp-validation-for="BasicSalary" class="text-danger offset-1"></span>
+                            <input asp-for="BasicSalary" type="number" class="form-control">
+                            <span asp-validation-for="BasicSalary" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -42,10 +46,10 @@
                             <label>Salary This Month:</label>
                         </div>
                         <div class="form-group col-8">
-                            <input asp-for="Salary" type="number" class="form-control" placeholder="Enter Basic Salary...">
+                            <input asp-for="Salary" type="number" class="form-control">
+                            <span asp-validation-for="Salary" class="text-danger"></span>
                         </div>
                     </div>
-
 
                     @if (Model.Id == 0)
                     {

@@ -26,11 +26,23 @@
                         <input asp-for="Id" type="text" class="form-control" hidden>
                         <input asp-for="ImgUrl" type="text" class="form-control" hidden>
                     </div>
-                    <div class="form-group">
-                        <input asp-for="Name" type="text" class="form-control" placeholder="Enter Name...">
+                    <div class="row">
+                        <div class="col-4 text-lg">
+                            <label>Name:</label>
+                        </div>
+                        <div class="form-group col-8">
+                            <input asp-for="Name" type="text" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input asp-for="Description" type="text" class="form-control" placeholder="Enter Description...">
+                    <div class="row">
+                        <div class="col-4 text-lg">
+                            <label>Description:</label>
+                        </div>
+                        <div class="form-group col-8">
+                            <input asp-for="Description" type="text" class="form-control">
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">
@@ -40,11 +52,23 @@
                             <input type="file" name="files" id="uploadBox" multiple class="form-control" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input asp-for="NumberInStock" type="number" class="form-control" placeholder="Enter Quantity...">
+                    <div class="row">
+                        <div class="col-4 text-lg">
+                            <label>Number In Stock:</label>
+                        </div>
+                        <div class="form-group col-8">
+                            <input asp-for="NumberInStock" type="number" class="form-control">
+                            <span asp-validation-for="NumberInStock" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input asp-for="Price" type="number" class="form-control" placeholder="Enter Price...">
+                    <div class="row">
+                        <div class="col-4 text-lg">
+                            <label>Price: </label>
+                        </div>
+                        <div class="form-group col-8">
+                            <input asp-for="Price" type="number" class="form-control">
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">
@@ -53,6 +77,7 @@
                         <div class="form-group col-9">
                             @Html.DropDownListFor(m => m.CategoryId, Model.CategoryList, "-Select a Category",
                            new { @class = "form-control" })
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -62,6 +87,7 @@
                         <div class="form-group col-9">
                             @Html.DropDownListFor(m => m.ManufacturerId, Model.ManufacturerList, "-Select a Manufacturer",
                            new { @class = "form-control" })
+                            <span asp-validation-for="ManufacturerId" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -96,7 +122,6 @@
                 <img src="@Model.ImgUrl" width="100%" style="border-radius:5px; border:1px solid #bbb9b9 ;height:400px" />
             </div>
         }
-
     </div>
-
+</div>
 

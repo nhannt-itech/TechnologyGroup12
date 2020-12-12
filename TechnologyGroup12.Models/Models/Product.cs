@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechnologyGroup12.Models.Models
@@ -14,15 +15,23 @@ namespace TechnologyGroup12.Models.Models
         }
 
         public long Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         public string ImgUrl { get; set; }
+        [Required]
         public DateTime CreatDate { get; set; }
+        [Required]
         public DateTime ModifyDate { get; set; }
+        [Required]
         public int? NumberInStock { get; set; }
+        [Required]
         public int Price { get; set; }
         public bool? OnSale { get; set; }
+        [Required]
         public long? ManufacturerId { get; set; }
+        [Required]
         public long? CategoryId { get; set; }
 
         public virtual Category Category { get; set; }

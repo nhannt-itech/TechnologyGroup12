@@ -31,9 +31,8 @@
                         <div class="form-group col-9">
                             @Html.DropDownListFor(m => m.CustomerId, Model.CustomerList, "-Select a Customer",
                            new { @class = "form-control" })
+                            <span asp-validation-for="CustomerId" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="CustomerId" class="text-danger offset-1"></span>
-
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">
@@ -42,8 +41,8 @@
                         <div class="form-group col-9">
                             @Html.DropDownListFor(m => m.EmployeeId, Model.EmployeeList, "-Select an Employee",
                            new { @class = "form-control" })
+                            <span asp-validation-for="EmployeeId" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="EmployeeId" class="text-danger offset-1"></span>
                     </div>
                     <div class="row">
                         <div class="col-3 text-lg">
@@ -51,6 +50,7 @@
                         </div>
                         <div class="form-group col-9">
                             <input asp-for="TotalPriceBill" type="number" class="form-control" readonly>
+                            <span asp-validation-for="TotalPriceBill" class="text-danger"></span>
                         </div>
                     </div>
                     @if (Model.Id == 0)

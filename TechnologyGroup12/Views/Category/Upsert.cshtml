@@ -23,13 +23,23 @@
                 </div>
                 <form method="post" class="user">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <input asp-for="Name" type="text" class="form-control" placeholder="Enter Category Name...">
-                        <span asp-validation-for="Name" class="text-danger offset-1"></span>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Name:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="Name" type="text" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <input asp-for="CategoryId" type="text" class="form-control" placeholder="Enter Child Category Id...">
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Category Id:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="CategoryId" type="text" class="form-control">
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
                     </div>
                     @if (Model.Id == 0)
                     {

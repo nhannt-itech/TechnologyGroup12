@@ -12,6 +12,7 @@ namespace TechnologyGroup12.Models.Models
         public string Name { get; set; }
         [Required]
         public DateTime Birth { get; set; }
+        [Required]
         public string Relationship { get; set; }
         public string Gender { get; set; }
         [Required]

@@ -14,6 +14,7 @@ namespace TechnologyGroup12.Models.Models
         public long Id { get; set; }
         [Required]
         public string Name { get; set; }
+        [Required]
         public string Nation { get; set; }
         [Required]
         public int Phone { get; set; }
