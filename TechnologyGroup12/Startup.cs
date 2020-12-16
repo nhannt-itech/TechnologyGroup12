@@ -73,7 +73,7 @@ namespace TechnologyGroup12
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Server}/{action=Index}/{id?}");
             });
         }
     }

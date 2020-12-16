@@ -82,17 +82,31 @@ namespace TechnologyGroup12.Controllers
                         Value = i
                     });
 
-                    _writableCnt.Update(opt =>
+                    if (serverConnection.userName != null)
                     {
-                        opt.DefaultConnection = @"Server=" + serverConnection.serverName +
-                        @";Database=" + serverConnection.databaseName +
-                        @";User Id=" + serverConnection.userName +
-                        @"; Password=" + serverConnection.passWord +
-                        @";";//;Trusted_Connection=True
-                    });
+                        _writableCnt.Update(opt =>
+                        {
+                            opt.DefaultConnection = @"Server=" + serverConnection.serverName +
+                            @";Database=" + serverConnection.databaseName +
+                            @";User Id=" + serverConnection.userName +
+                            @"; Password=" + serverConnection.passWord +
+                            @";";//;Trusted_Connection=True
+                        });
+                    }
+                    else
+                    {
+                        _writableCnt.Update(opt =>
+                        {
+                            opt.DefaultConnection = @"Server=" + serverConnection.serverName +
+                            @";Database=" + serverConnection.databaseName +
+                            @";Trusted_Connection=True;MultipleActiveResultSets=true";
+                        });
+                    }
+
+                    
 
                     return View(serverConnection);
-                    //"Server=localhost\\SQLEXPRESS;Database=TechnologyGroup12DB;Trusted_Connection=True;MultipleActiveResultSets=true"
+                    //"Server =localhost\\SQLEXPRESS;Database=TechnologyGroup12DB;Trusted_Connection=True;MultipleActiveResultSets=true"
 
 
                 }
@@ -141,47 +155,23 @@ namespace TechnologyGroup12.Controllers
                             Text = i,
                             Value = i
                         });
-
                         return View(serverConnection);
                     }
-
                 }
-                else
-                {
-                    List<string> lDatabase = new List<string>();
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                 List<string> lDatabase = new List<string>();
 
                     serverConnection.databaseTable = lDatabase.Select(i => new SelectListItem
                     {
                         Text = i,
                         Value = i
                     });
-                    return View(serverConnection);
-                }
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-                var connectionString = ExecuteConnection.Connect(serverConnection.serverName);
-
-
-                List<string> lDatabase = new List<string>();
-                connectionString.Open();
-                SqlCommand cmd = new SqlCommand("SELECT name from sys.databases", connectionString);
-                using (IDataReader dr = cmd.ExecuteReader())
-                {
-                    while (dr.Read())
-                    {
-                        lDatabase.Add(dr[0].ToString());
-                    }
-                }
-
-                serverConnection.databaseTable = lDatabase.Select(i => new SelectListItem
-                {
-                    Text = i,
-                    Value = i
-                });
                 return View(serverConnection);
             }
+            return View(serverConnection);
         }
     }
 }

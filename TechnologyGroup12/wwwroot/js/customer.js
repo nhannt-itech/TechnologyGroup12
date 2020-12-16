@@ -28,14 +28,14 @@ function loadDataTable() {
                         if (data.isVip == false) {
                             return `
                             <div class="text-center">
-                                <i class="btn btn-warning text-white fas fa-user"></i> 
+                                <i class="btn btn-dark text-white fas fa-user"></i> 
                             </div>
                             `;
                         }
                         else {
                             return `
                             <div class="text-center">
-                                <i class="btn btn-danger text-white fas fa-ban"></i> 
+                                <i class="btn btn-warning text-white fas fa-ban"></i> 
                             </div>
                             `;
                         }
@@ -155,7 +155,7 @@ function Delete(url) {
                     else {
                         swalWithBootstrapButtons.fire(
                             'Error',
-                            'Can not delete this, maybe it not exit or error from sever',
+                            data.message,
                             'error'
                         )
                     }

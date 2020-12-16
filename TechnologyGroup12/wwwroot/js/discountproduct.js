@@ -59,12 +59,21 @@ function Delete(discountId, productId) {
                 processData: false,
                 data: "discountId=" + discountId + "&productId=" + productId,
                 success: function (data) {
-                    swalWithBootstrapButtons.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    );
-                    $('#tblData').DataTable().ajax.reload();
+                    if (data.success) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        );
+                        $('#tblData').DataTable().ajax.reload();
+                    }
+                    else {
+                        swalWithBootstrapButtons.fire(
+                            'Error',
+                            data.message,
+                            'error'
+                        )
+                    }
                 }
 
             })

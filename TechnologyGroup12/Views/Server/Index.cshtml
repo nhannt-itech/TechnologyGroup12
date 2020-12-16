@@ -51,16 +51,16 @@
                                             <span asp-validation-for="serverName" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <select type="text" class="form-control" id="DropDownAuthen" onchange="showHide()" placeholder="Enter Authentication...">
+                                            <select type="text" class="form-control chooseTypeServer" id="DropDownAuthen" onchange="showHide()" placeholder="Enter Authentication...">
                                                 <option value="Window Authentication">Window Authentication</option>
                                                 <option value="SQL Server Authentication">SQL Server Authentication</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <input asp-for="userName" type="text" class="form-control" id="readonlyUserInput" placeholder="Username" readonly>
+                                            <input asp-for="userName" type="text" class="form-control userServer" id="readonlyUserInput" placeholder="Username" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <input asp-for="passWord" type="text" class="form-control" id="readonlyPasswordInput" placeholder="Password" readonly>
+                                            <input asp-for="passWord" type="text" class="form-control passwordServer" id="readonlyPasswordInput" placeholder="Password" readonly>
                                         </div>
                                         @if (Model.databaseTable.Count() > 0 && Model.databaseName == null)
                                         {
@@ -114,11 +114,14 @@
     <script src="~/Assets/js/sb-admin-2.min.js"></script>
 
     <script type="text/javascript">
+
         function showHide() {
             var val = document.getElementById("DropDownAuthen").value;
             if (val == "Window Authentication") {
                 document.getElementById("readonlyUserInput").readOnly = true;
                 document.getElementById("readonlyPasswordInput").readOnly = true;
+                document.getElementById("readonlyUserInput").value = "";
+                document.getElementById("readonlyPasswordInput").value = "";
             }
 
             else {
@@ -127,6 +130,8 @@
             }
         }
     </script>
+    <partial name="_ValidationScriptsPartial" />
+
 </body>
 
 </html>

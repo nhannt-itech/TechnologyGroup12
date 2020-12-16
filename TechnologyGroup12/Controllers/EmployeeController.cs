@@ -49,7 +49,6 @@ namespace TechnologyGroup12.Controllers
             };
             if (id == null)
             {
-                employee.Birth = DateTime.Now;
                 return View(employee);
             }
             else
@@ -160,7 +159,7 @@ namespace TechnologyGroup12.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = "Delete False!" });
+                return Json(new { success = false, message = ex.Message });
             }
         }
 

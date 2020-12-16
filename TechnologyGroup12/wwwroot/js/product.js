@@ -111,7 +111,7 @@ function Delete(url) {
                     else {
                         swalWithBootstrapButtons.fire(
                             'Error',
-                            'Can not delete this, maybe it not exit or error from sever',
+                            data.message,
                             'error'
                         )
                     }

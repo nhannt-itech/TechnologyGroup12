@@ -98,7 +98,7 @@ namespace TechnologyGroup12.Controllers
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = "Delete False!" });
+                return Json(new { success = false, message = ex.Message });
             }
         }
 
