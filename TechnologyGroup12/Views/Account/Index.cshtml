@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card shadow mb-4 bg-gray-100">
+    <div class="card-header py-2">
+        <a asp-controller="Account" asp-action="Upsert" type="submit" class="float-lg-right btn btn-info ml-2" style="color:white">
+            <i class="fas fa-plus fa-sm"></i>
+            Add Account
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="">
+            <br />
+            <table class="table-bordered border-dark text-gray-900" id="tblData" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        <th>EmployeeId</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/account.js"></script>
+}
+
+

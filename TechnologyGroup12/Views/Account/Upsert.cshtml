@@ -1,0 +1,84 @@
+﻿@model TechnologyGroup12.Models.Models.Account
+@{
+    var Title = "ADD ACCOUNT";
+
+    if (Model.Username != null)
+    {
+        Title = "UPDATE ACCOUNT";
+    }
+
+    ViewData["Title"] = Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <!-- Nested Row within Card Body -->
+    <div class="row">
+        <div class="offset-3 col-lg-6 ">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">@Title</h1>
+                </div>
+                <form asp-controller="Customer" asp-action="Upsert" method="post" class="user">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Username:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="Username" type="text" class="form-control">
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Password:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <input asp-for="Password" type="text" class="form-control">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            <label>Role:</label>
+                        </div>
+                        <div class="form-group col-9">
+                            <select asp-for="Role" name="Gender" class="form-control">
+                                <option value="1">Admin</option>
+                                <option value="0">User</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text-lg">
+                            Employee:
+                        </div>
+                        <div class="form-group col-9">
+                            @Html.DropDownListFor(m => m.EmployeeId, Model.EmployeeList, "-Select a Employee",
+                           new { @class = "form-control" })
+                            <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    @if (Model.Username == null)
+                    {
+                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                            Add
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                            Update
+                        </button>
+                    }
+                    <a asp-controller="Account" asp-action="Index" class="btn btn-warning btn-user btn-block">
+                        < Back To List
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
