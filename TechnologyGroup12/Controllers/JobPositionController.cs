@@ -41,13 +41,12 @@ namespace TechnologyGroup12.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(JobPosition jobPosition)
         {
-            if (ModelState.IsValid)
+            var parameter = new DynamicParameters();
+            parameter.Add("@Name", jobPosition.Name);
+            parameter.Add("@BasicSalary", jobPosition.BasicSalary);
+            parameter.Add("@Salary", jobPosition.Salary);
+            try
             {
-                var parameter = new DynamicParameters();
-                parameter.Add("@Name", jobPosition.Name);
-                parameter.Add("@BasicSalary", jobPosition.BasicSalary);
-                parameter.Add("@Salary", jobPosition.Salary);
-
                 if (jobPosition.Id == 0)
                 {
                     _unitOfWork.SP_Call.Excute("SP_Create_JobPosition", parameter);
@@ -60,7 +59,11 @@ namespace TechnologyGroup12.Controllers
                     return View(jobPosition);
                 }
             }
-            return View(jobPosition);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(jobPosition);
+            }
         }
 
 
@@ -84,10 +87,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(long? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_JobPosition", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_JobPosition", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Delete False!" });
+            }
         }
     }
 }

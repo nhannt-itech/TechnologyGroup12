@@ -43,20 +43,19 @@ namespace TechnologyGroup12.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Discount discount)
         {
-            if (ModelState.IsValid)
+            var parameter = new DynamicParameters();
+
+            parameter.Add("Id", discount.Id);
+            parameter.Add("@Name", discount.Name);
+            parameter.Add("@Description", discount.Description);
+            parameter.Add("@DiscountValue", discount.DiscountValue);
+            parameter.Add("@StartDate", discount.StartDate);
+            parameter.Add("@EndDate", discount.EndDate);
+
+            var lDiscount = _unitOfWork.SP_Call.List<Discount>("SP_GetAll_Discount");
+            int count = lDiscount.Count(x => x.Id == discount.Id); //Kiểm tra đã có mã này chưa.
+            try
             {
-                var parameter = new DynamicParameters();
-
-                parameter.Add("Id", discount.Id);
-                parameter.Add("@Name", discount.Name);
-                parameter.Add("@Description", discount.Description);
-                parameter.Add("@DiscountValue", discount.DiscountValue);
-                parameter.Add("@StartDate", discount.StartDate);
-                parameter.Add("@EndDate", discount.EndDate);
-
-                var lDiscount = _unitOfWork.SP_Call.List<Discount>("SP_GetAll_Discount");
-                int count = lDiscount.Count(x => x.Id == discount.Id); //Kiểm tra đã có mã này chưa.
-
                 if (count == 0)
                 {
                     _unitOfWork.SP_Call.Excute("SP_Create_Discount", parameter);
@@ -69,7 +68,11 @@ namespace TechnologyGroup12.Controllers
                     return View(discount);
                 }
             }
-            return View(discount);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(discount);
+            }
         }
 
         [HttpGet]
@@ -92,10 +95,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(string? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Discount", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_Discount", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = true, message = "Delete False!" });
+            }
         }
 
         [AcceptVerbs("Get", "Post")]

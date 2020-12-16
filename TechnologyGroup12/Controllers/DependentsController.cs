@@ -40,17 +40,15 @@ namespace TechnologyGroup12.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Dependents dependents)
         {
-            if (ModelState.IsValid)
+            var parameter = new DynamicParameters();
+            parameter.Add("@Name", dependents.Name);
+            parameter.Add("@Birth", dependents.Birth);
+            parameter.Add("@Gender", dependents.Gender);
+            parameter.Add("@Phone", dependents.Phone);
+            parameter.Add("@Relationship", dependents.Relationship);
+            parameter.Add("@EmployeeId", dependents.EmployeeId);
+            try
             {
-                var parameter = new DynamicParameters();
-                parameter.Add("@Name", dependents.Name);
-                parameter.Add("@Birth", dependents.Birth);
-                parameter.Add("@Gender", dependents.Gender);
-                parameter.Add("@Phone", dependents.Phone);
-                parameter.Add("@Relationship", dependents.Relationship);
-                parameter.Add("@EmployeeId", dependents.EmployeeId);
-
-
                 if (dependents.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
                 {
                     _unitOfWork.SP_Call.Excute("SP_Create_Dependents", parameter);
@@ -63,7 +61,11 @@ namespace TechnologyGroup12.Controllers
                     return View(dependents);
                 }
             }
-            return View(dependents);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(dependents);
+            }
         }
 
         [HttpGet]
@@ -89,10 +91,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(string? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Dependents", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_Dependents", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Delete False!" });
+            }
         }
     }
 }

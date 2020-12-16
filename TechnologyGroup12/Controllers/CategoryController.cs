@@ -40,12 +40,12 @@ namespace TechnologyGroup12.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Category category)
         {
-            if (ModelState.IsValid)
-            {
-                var parameter = new DynamicParameters();
-                parameter.Add("@Name", category.Name);
-                parameter.Add("@CategoryId", category.CategoryId);
+            var parameter = new DynamicParameters();
+            parameter.Add("@Name", category.Name);
+            parameter.Add("@CategoryId", category.CategoryId);
 
+            try
+            {
                 if (category.Id == 0)
                 {
                     _unitOfWork.SP_Call.Excute("SP_Create_Category", parameter);
@@ -58,7 +58,11 @@ namespace TechnologyGroup12.Controllers
                     return View(category);
                 }
             }
-            return View(category);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(category);
+            }
         }
 
 
@@ -82,10 +86,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(long? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Category", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_Category", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Delete False!" });
+            }
         }
     }
 }

@@ -50,6 +50,42 @@ namespace TechnologyGroup12.Controllers
             return View(account);
         }
 
+        [HttpPost]
+        public IActionResult Upsert(Account account)
+        {
+            var lEmployee = _unitOfWork.SP_Call.List<Employee>("SP_GetAll_Employee");
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@LGNAME", account.Username);
+                parameter.Add("@USERNAME", account.Username);
+                parameter.Add("@PASS", account.Password);
+                parameter.Add("@ROLE", account.Role.ToString());
+                _unitOfWork.SP_Call.Excute("dbo.USP_CreateUser", parameter);
+
+                var parameter1 = new DynamicParameters();
+                parameter1.Add("@Username", account.Username);
+                parameter1.Add("@Password", account.Password);
+                parameter1.Add("@Role", account.Role);
+                parameter1.Add("@EmployeeId", account.EmployeeId);
+                _unitOfWork.SP_Call.Excute("SP_Create_Account", parameter1);
+
+                _unitOfWork.Save();
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                account.EmployeeList = lEmployee.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                });
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(account);
+            }
+        }
+
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -57,13 +93,5 @@ namespace TechnologyGroup12.Controllers
             return Json(new { data = allObj.AsEnumerable() });
         }
 
-        [HttpDelete]
-        public IActionResult Delete(string? id)
-        {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Username", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Account", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
-        }
     }
 }

@@ -39,16 +39,15 @@ namespace TechnologyGroup12.Controllers
         [HttpPost]
         public IActionResult Upsert(Customer customer)
         {
-            if (ModelState.IsValid)
+            var parameter = new DynamicParameters();
+            parameter.Add("@Name", customer.Name);
+            parameter.Add("@Birth", customer.Birth);
+            parameter.Add("@Gender", customer.Gender);
+            parameter.Add("@Phone", customer.Phone);
+            parameter.Add("@Email", customer.Email);
+            parameter.Add("@Address", customer.Address);
+            try
             {
-                var parameter = new DynamicParameters();
-                parameter.Add("@Name", customer.Name);
-                parameter.Add("@Birth", customer.Birth);
-                parameter.Add("@Gender", customer.Gender);
-                parameter.Add("@Phone", customer.Phone);
-                parameter.Add("@Email", customer.Email);
-                parameter.Add("@Address", customer.Address);
-
                 if (customer.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
                 {
                     _unitOfWork.SP_Call.Excute("SP_Create_Customer", parameter);
@@ -61,7 +60,11 @@ namespace TechnologyGroup12.Controllers
                     return View(customer);
                 }
             }
-            return View(customer);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(customer);
+            }
         }
 
 
@@ -85,10 +88,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(string? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Customer", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_Customer", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Delete False!" });
+            }
         }
 
         #region ErrorValidationModel

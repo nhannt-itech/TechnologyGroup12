@@ -47,15 +47,20 @@ namespace TechnologyGroup12.Controllers
                 Value = i.Id.ToString()
             });
 
-            if (ModelState.IsValid)
+            try
             {
                 var parameter = new DynamicParameters();
                 parameter.Add("@DiscountId", discountProduct.DiscountId);
                 parameter.Add("@ProductId", discountProduct.ProductId);
 
                 _unitOfWork.SP_Call.Excute("SP_Create_Discount_Product", parameter);
+                return RedirectToAction("Upsert", "Discount", new { id = discountProduct.DiscountId });
             }
-            return RedirectToAction("Upsert", "Discount", new { id = discountProduct.DiscountId });
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(discountProduct);
+            }
         }
 
         [HttpGet]
@@ -70,12 +75,19 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(string? discountId, long productId)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@DiscountId", discountId);
-            parameter.Add("@ProductId", productId);
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@DiscountId", discountId);
+                parameter.Add("@ProductId", productId);
 
-            _unitOfWork.SP_Call.Excute("SP_Delete_Discount_Product", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+                _unitOfWork.SP_Call.Excute("SP_Delete_Discount_Product", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = true, message = "Delete False!" });
+            }
         }
 
         [AcceptVerbs("Get", "Post")]

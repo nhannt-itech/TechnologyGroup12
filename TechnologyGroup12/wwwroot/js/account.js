@@ -10,24 +10,8 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "username" },
-            { "data": "password" },
             { "data": "role" },
-            { "data": "employeeId" },
-            {
-                "data": "username",
-                "render": function (data) {
-                    return `
-                            <div class="text-center">
-                                <a href="/Account/Upsert/${data}" class="btn btn-success text-white" style="cursor:pointer">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a onclick=Delete("/Account/Delete/${data}") class="btn btn-danger text-white" style="cursor:pointer">
-                                    <i class="fas fa-trash-alt"></i> 
-                                </a>
-                            </div>
-                            `;
-                }, "width": "10%"
-            }
+            { "data": "employeeId" }
         ]
     });
 }

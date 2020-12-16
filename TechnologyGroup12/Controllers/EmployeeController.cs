@@ -57,7 +57,6 @@ namespace TechnologyGroup12.Controllers
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", id);
                 employee = _unitOfWork.SP_Call.OneRecord<Employee>("SP_Get_Employee", parameters);
-                //Lúc này SelectList bị reset nên phải add vào lại
                 employee.GenderList = lGender.Select(i => new SelectListItem
                 {
                     Text = i,
@@ -152,10 +151,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(string? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Employee", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_Employee", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Delete False!" });
+            }
         }
 
         [AcceptVerbs("Get", "Post")]

@@ -49,8 +49,6 @@ namespace TechnologyGroup12.Controllers
         {
             try
             {
-
-
                 if (ModelState.IsValid)
                 {
 

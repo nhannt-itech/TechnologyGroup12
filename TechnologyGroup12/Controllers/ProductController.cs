@@ -75,59 +75,59 @@ namespace TechnologyGroup12.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Product product)
         {
-            if (ModelState.IsValid)
+            string webRootPath = _hostEnvironment.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
+            if (files.Count > 0)
             {
+                string fileName = Guid.NewGuid().ToString();
+                var uploads = Path.Combine(webRootPath, @"image\product");//"C:\\Users\\MayXauGiaCao\\Desktop\\Rynoz.EShop\\Rynoz.EShop\\wwwroot"
+                var extension = Path.GetExtension(files[0].FileName); // ".png"
 
-                string webRootPath = _hostEnvironment.WebRootPath;
-                var files = HttpContext.Request.Form.Files;
-                if (files.Count > 0)
+                if (product.ImgUrl != null)
                 {
-                    string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(webRootPath, @"image\product");//"C:\\Users\\MayXauGiaCao\\Desktop\\Rynoz.EShop\\Rynoz.EShop\\wwwroot"
-                    var extension = Path.GetExtension(files[0].FileName); // ".png"
-
-                    if (product.ImgUrl != null)
+                    //this is an edit and we need to remove old image
+                    var imagePath = Path.Combine(webRootPath, product.ImgUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(imagePath))
                     {
-                        //this is an edit and we need to remove old image
-                        var imagePath = Path.Combine(webRootPath, product.ImgUrl.TrimStart('\\'));
-                        if (System.IO.File.Exists(imagePath))
-                        {
-                            System.IO.File.Delete(imagePath);
-                        }
+                        System.IO.File.Delete(imagePath);
                     }
-
-                    using (var filesStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                    {
-                        //uploads: "C:\\Users\\MayXauGiaCao\\Desktop\\Rynoz.EShop\\Rynoz.EShop\\wwwroot\\images\\products"
-                        //filename: "6a9c2297-0ef2-4edf-938f-c19971ce8e26"
-                        //extension: ".png"
-                        files[0].CopyTo(filesStreams);
-                    }
-                    product.ImgUrl = @"\image\product\" + fileName + extension;
                 }
 
-                var parameter = new DynamicParameters();
-
-                parameter.Add("@Name", product.Name);
-                parameter.Add("@Description", product.Description);
-                parameter.Add("@ImgUrl", product.ImgUrl);
-                parameter.Add("@NumberInStock", product.NumberInStock);
-                parameter.Add("@Price", product.Price);
-                parameter.Add("@ManufacturerId", product.ManufacturerId);
-                parameter.Add("@CategoryId", product.CategoryId);
-
-                var lCategory = _unitOfWork.SP_Call.List<Category>("SP_GetAll_Category");
-                var lManufacturer = _unitOfWork.SP_Call.List<Manufacturer>("SP_GetAll_Manufacturer");
-                product.CategoryList = lCategory.Select(i => new SelectListItem
+                using (var filesStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
                 {
-                    Text = i.Name,
-                    Value = i.Id.ToString()
-                });
-                product.ManufacturerList = lManufacturer.Select(i => new SelectListItem
-                {
-                    Text = i.Name,
-                    Value = i.Id.ToString()
-                });
+                    //uploads: "C:\\Users\\MayXauGiaCao\\Desktop\\Rynoz.EShop\\Rynoz.EShop\\wwwroot\\images\\products"
+                    //filename: "6a9c2297-0ef2-4edf-938f-c19971ce8e26"
+                    //extension: ".png"
+                    files[0].CopyTo(filesStreams);
+                }
+                product.ImgUrl = @"\image\product\" + fileName + extension;
+            }
+
+            var parameter = new DynamicParameters();
+
+            parameter.Add("@Name", product.Name);
+            parameter.Add("@Description", product.Description);
+            parameter.Add("@ImgUrl", product.ImgUrl);
+            parameter.Add("@NumberInStock", product.NumberInStock);
+            parameter.Add("@Price", product.Price);
+            parameter.Add("@ManufacturerId", product.ManufacturerId);
+            parameter.Add("@CategoryId", product.CategoryId);
+
+            var lCategory = _unitOfWork.SP_Call.List<Category>("SP_GetAll_Category");
+            var lManufacturer = _unitOfWork.SP_Call.List<Manufacturer>("SP_GetAll_Manufacturer");
+            product.CategoryList = lCategory.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            product.ManufacturerList = lManufacturer.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+
+            try
+            {
 
                 if (product.Id == 0)
                 {
@@ -141,7 +141,12 @@ namespace TechnologyGroup12.Controllers
                     return View(product);
                 }
             }
-            return View(product);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(product);
+            }
+
         }
 
 
@@ -165,10 +170,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(long? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Product", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_Product", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = true, message = "Delete False!" });
+            }
         }
     }
 }

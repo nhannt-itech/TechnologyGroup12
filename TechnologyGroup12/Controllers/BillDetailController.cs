@@ -40,7 +40,7 @@ namespace TechnologyGroup12.Controllers
             BillDetail billDetails = new BillDetail()
             {
                 Id = Guid.Parse("00000000-0000-0000-0000-000000000000"),
-                BillId = id, //id của Bill
+                BillId = id,
                 ProductList = lProduct.Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -61,35 +61,31 @@ namespace TechnologyGroup12.Controllers
                 Value = i.Id.ToString()
             });
 
-            if (ModelState.IsValid)
-            {
-                var parameter = new DynamicParameters();
-                parameter.Add("@ProductId", billDetail.ProductId);
-                parameter.Add("@Quantity", billDetail.Quantity);
-                parameter.Add("@BillId", billDetail.BillId);
+            var parameter = new DynamicParameters();
+            parameter.Add("@ProductId", billDetail.ProductId);
+            parameter.Add("@Quantity", billDetail.Quantity);
+            parameter.Add("@BillId", billDetail.BillId);
 
-                try
+            try
+            {
+                if (billDetail.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
                 {
-                    if (billDetail.Id.ToString() == "00000000-0000-0000-0000-000000000000") // Do là dạng Guid nên nó sẽ như vậy
-                    {
-                        _unitOfWork.SP_Call.Excute("SP_Create_BillDetail", parameter);
-                        return RedirectToAction("Upsert", "Bill", new { id = billDetail.BillId.ToString() });
-                    }
-                    else
-                    {
-                        parameter.Add("@Id", billDetail.Id);
-                        _unitOfWork.SP_Call.Excute("SP_Update_BillDetail", parameter);
-                        return View(billDetail);
-                    }
+                    _unitOfWork.SP_Call.Excute("SP_Create_BillDetail", parameter);
+                    return RedirectToAction("Upsert", "Bill", new { id = billDetail.BillId.ToString() });
                 }
-                catch (Exception ex)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, ex.Message.
-                        Replace("The transaction ended in the trigger. The batch has been aborted", ""));
+                    parameter.Add("@Id", billDetail.Id);
+                    _unitOfWork.SP_Call.Excute("SP_Update_BillDetail", parameter);
                     return View(billDetail);
-                }    
+                }
             }
-            return View(billDetail);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message.
+                    Replace("The transaction ended in the trigger. The batch has been aborted", ""));
+                return View(billDetail);
+            }
         }
 
         [HttpGet]
@@ -104,10 +100,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(string? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_BillDetail", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_BillDetail", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Delete False!" });
+            }
         }
     }
 }

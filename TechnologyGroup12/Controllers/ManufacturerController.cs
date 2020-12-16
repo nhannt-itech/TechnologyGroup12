@@ -40,7 +40,7 @@ namespace TechnologyGroup12.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Manufacturer manufacturer)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var parameter = new DynamicParameters();
                 parameter.Add("@Name", manufacturer.Name);
@@ -60,7 +60,11 @@ namespace TechnologyGroup12.Controllers
                     return View(manufacturer);
                 }
             }
-            return View(manufacturer);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(manufacturer);
+            }
         }
 
 
@@ -85,10 +89,17 @@ namespace TechnologyGroup12.Controllers
         [HttpDelete]
         public IActionResult Delete(long? id)
         {
-            var parameter = new DynamicParameters();
-            parameter.Add("@Id", id);
-            _unitOfWork.SP_Call.Excute("SP_Delete_Category", parameter);
-            return Json(new { success = true, message = "Delete successful!" });
+            try
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Id", id);
+                _unitOfWork.SP_Call.Excute("SP_Delete_Category", parameter);
+                return Json(new { success = true, message = "Delete successful!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Delete False!" });
+            }
         }
 
         [AcceptVerbs("Get", "Post")]
