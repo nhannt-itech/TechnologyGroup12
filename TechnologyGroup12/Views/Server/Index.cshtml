@@ -47,6 +47,11 @@
                                     <form method="post" class="user">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                         <div class="form-group">
+                                            Current Connection: @Model.connectionString
+
+                                            <span asp-validation-for="connectionString" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
                                             <input asp-for="serverName" type="text" class="form-control" placeholder="Enter Server...">
                                             <span asp-validation-for="serverName" class="text-danger"></span>
                                         </div>

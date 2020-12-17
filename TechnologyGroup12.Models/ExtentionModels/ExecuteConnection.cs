@@ -1,14 +1,20 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using TechnologyGroup12.Models.ExtentionModels.IExtensionModels;
 
 namespace TechnologyGroup12.Models.ExtentionModels
 {
     public static class ExecuteConnection
     {
         // "Server=localhost\\SQLEXPRESS;Database=TechnologyGroup12DB;Trusted_Connection=True;MultipleActiveResultSets=true"
- 
+        public static string GetConncetionString(IWritableOptions<ConnectionStrings>? writableCnt)
+        {
+            return writableCnt.Value.ToString();
+        }
 
         public static SqlConnection Connect(string Server, string DatabaseTable, string UserName, string Password)
         {

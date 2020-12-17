@@ -15,11 +15,26 @@ function loadDataTable() {
                 "url": "/Discount/GetAll"
             },
             "columns": [
-                { "data": "id", "width": "15%" },
-                { "data": "name", "width": "15%" },
-                { "data": "discountValue", "width": "15%" },
-                { "data": "startDate", "width": "15%" },
-                { "data": "endDate", "width": "15%" },
+                { "data": "id"},
+                { "data": "name" },
+                {
+                    "data": "discountValue",
+                    "render": function (data) {
+                        return (data * 100).toString() + '%';
+                    }
+                },
+                {
+                    "data": "startDate",
+                    "render": function (data) {
+                        return new Date(data).toLocaleString();
+                    }
+                },
+                {
+                    "data": "endDate",
+                    "render": function (data) {
+                        return new Date(data).toLocaleString();
+                    }
+                },
                 {
                     "data": "id",
                     "render": function (data) {
@@ -33,7 +48,7 @@ function loadDataTable() {
                                 </a>
                             </div>
                             `;
-                    }, "width": "25%"
+                    }
                 }
             ]
         })
@@ -52,11 +67,26 @@ function SearchFor() {
                 "url": "/Discount/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor,
             },
             "columns": [
-                { "data": "id", "width": "15%" },
-                { "data": "name", "width": "15%" },
-                { "data": "discountValue", "width": "15%" },
-                { "data": "startDate", "width": "15%" },
-                { "data": "endDate", "width": "15%" },
+                { "data": "id" },
+                { "data": "name" },
+                {
+                    "data": "discountValue",
+                    "render": function (data) {
+                        return (data * 100).toString() + '%';
+                    }
+                },
+                {
+                    "data": "startDate",
+                    "render": function (data) {
+                        return new Date(data).toLocaleString();
+                    }
+                },
+                {
+                    "data": "endDate",
+                    "render": function (data) {
+                        return new Date(data).toLocaleString();
+                    }
+                },
                 {
                     "data": "id",
                     "render": function (data) {
@@ -70,7 +100,7 @@ function SearchFor() {
                                 </a>
                             </div>
                             `;
-                    }, "width": "25%"
+                    }
                 }
             ]
         })

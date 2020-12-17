@@ -21,18 +21,18 @@ namespace TechnologyGroup12.Controllers
         {
             _connectionStrings = connectionStrings.Value;
             _writableCnt = writableCnt;
-
         }
 
         public IActionResult Index()
         {
-            _writableCnt.Update(opt =>
-            {
-                opt.DefaultConnection = "Server=localhost\\SQLEXPRESS;Database=TechnologyStoreDB;Trusted_Connection=True;";
-            });
+            //_writableCnt.Update(opt =>
+            //{
+            //    opt.DefaultConnection = "Server=localhost\\SQLEXPRESS;Database=TechnologyStoreDB;Trusted_Connection=True;";
+            //});
             List<string> lDatabase = new List<string>();
             ServerConnection serverConnection = new ServerConnection();
             serverConnection.serverName = @"";
+            serverConnection.connectionString = _writableCnt.Value.DefaultConnection.ToString();
 
             serverConnection.databaseTable = lDatabase.Select(i => new SelectListItem
             {

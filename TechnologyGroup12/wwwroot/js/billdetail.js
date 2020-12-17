@@ -17,9 +17,18 @@ function loadDataTable() {
             "columns": [
                 { "data": "productName", "width": "15%" },
                 { "data": "quantity", "width": "15%" },
-                { "data": "totalPrice", "width": "15%" },
-                { "data": "discount", "width": "15%" },
                 {
+                    "data": "totalPrice",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
+                {
+                    "data": "discount",
+                    "render": function (data) {
+                        return (data * 100).toString() + '%';
+                    }
+                },                {
                     "data": "id",
                     "render": function (data) {
                         return `

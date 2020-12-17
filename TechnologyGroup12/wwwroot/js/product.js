@@ -15,12 +15,17 @@ function loadDataTable() {
                 "url": "/Product/GetAll"
             },
             "columns": [
-                { "data": "name", "width": "25%" },
-                { "data": "numberInStock", "width": "5%" },
-                { "data": "price", "width": "15%" },
-                { "data": "onSale", "width": "10%" },
-                { "data": "manufacturerName", "width": "15%" },
-                { "data": "categoryName", "width": "15%" },
+                { "data": "name" },
+                { "data": "numberInStock" },
+                {
+                    "data": "price",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
+                { "data": "onSale" },
+                { "data": "manufacturerName" },
+                { "data": "categoryName" },
                 {
                     "data": "id",
                     "render": function (data) {
@@ -34,7 +39,7 @@ function loadDataTable() {
                                 </a>
                             </div>
                             `;
-                    }, "width": "10%"
+                    }
                 }
             ]
         })
@@ -53,12 +58,17 @@ function SearchFor() {
                 "url": "/Product/SearchFor/?columnName=" + columnName + "&searchFor=" + searchFor,
             },
             "columns": [
-                { "data": "name", "width": "25%" },
-                { "data": "numberInStock", "width": "10%" },
-                { "data": "price", "width": "15%" },
-                { "data": "onSale", "width": "10%" },
-                { "data": "manufacturerName", "width": "15%" },
-                { "data": "categoryName", "width": "15%" },
+                { "data": "name" },
+                { "data": "numberInStock" },
+                {
+                    "data": "price",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
+                { "data": "onSale" },
+                { "data": "manufacturerName" },
+                { "data": "categoryName" },
                 {
                     "data": "id",
                     "render": function (data) {
@@ -72,7 +82,7 @@ function SearchFor() {
                                 </a>
                             </div>
                             `;
-                    }, "width": "10%"
+                    }
                 }
             ]
         })

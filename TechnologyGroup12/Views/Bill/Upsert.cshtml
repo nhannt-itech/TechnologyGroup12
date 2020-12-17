@@ -72,32 +72,36 @@
             </div>
         </div>
     </div>
-    <div class="card shadow mb-4">
-        <div class="card-header py-2">
-            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right">
-                <div class="input-group">
-                    <a asp-controller="BillDetail" asp-action="Insert" asp-route-id="@Model.Id" type="submit" class="btn btn-primary mr-3" style="color:white">
-                        Add Product in Bill
-                    </a>
+    @if (Model.Id != 0)
+    {
+        <div class="card shadow mb-4">
+            <div class="card-header py-2">
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search float-right">
+                    <div class="input-group">
+                        <a asp-controller="BillDetail" asp-action="Insert" asp-route-id="@Model.Id" type="submit" class="btn btn-primary mr-3" style="color:white">
+                            Add Product in Bill
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body">
+                <div class="">
+                    <table class="table table-bordered" id="tblData" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Total Price</th>
+                                <th>Discount</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
-            </form>
-        </div>
-        <div class="card-body">
-            <div class="">
-                <table class="table table-bordered" id="tblData" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
-                            <th>Total Price</th>
-                            <th>Discount</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                </table>
             </div>
         </div>
-    </div>
+    }
+
 </div>
 
 @section Scripts{

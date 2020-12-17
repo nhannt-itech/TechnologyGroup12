@@ -16,8 +16,18 @@ function loadDataTable() {
             },
             "columns": [
                 { "data": "name", "width": "30%" },
-                { "data": "basicSalary", "width": "20%" },
-                { "data": "salary", "width": "20%" },
+                {
+                    "data": "basicSalary",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
+                {
+                    "data": "salary",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
                 {
                     "data": "id",
                     "render": function (data) {
@@ -51,8 +61,18 @@ function SearchFor() {
             },
             "columns": [
                 { "data": "name", "width": "30%" },
-                { "data": "basicSalary", "width": "20%" },
-                { "data": "salary", "width": "20%" },
+                {
+                    "data": "basicSalary",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
+                {
+                    "data": "salary",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
                 {
                     "data": "id",
                     "render": function (data) {

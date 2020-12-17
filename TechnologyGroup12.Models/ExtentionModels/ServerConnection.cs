@@ -8,6 +8,7 @@ namespace TechnologyGroup12.Models.ExtentionModels
 {
     public class ServerConnection
     {
+        public string connectionString { get; set; }
         [Required]
         public string serverName { get; set; }
         [Required]

@@ -45,10 +45,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3 text-lg">
+                        <div class="col-4 text-lg">
                             <label>Image:</label>
                         </div>
-                        <div class="form-group col-9">
+                        <div class="form-group col-8">
                             <input type="file" name="files" id="uploadBox" multiple class="form-control" />
                         </div>
                     </div>
@@ -71,20 +71,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3 text-lg">
+                        <div class="col-4 text-lg">
                             Category:
                         </div>
-                        <div class="form-group col-9">
+                        <div class="form-group col-8">
                             @Html.DropDownListFor(m => m.CategoryId, Model.CategoryList, "-Select a Category",
                            new { @class = "form-control" })
                             <span asp-validation-for="CategoryId" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3 text-lg">
+                        <div class="col-4 text-lg">
                             Manufacturer:
                         </div>
-                        <div class="form-group col-9">
+                        <div class="form-group col-8">
                             @Html.DropDownListFor(m => m.ManufacturerId, Model.ManufacturerList, "-Select a Manufacturer",
                            new { @class = "form-control" })
                             <span asp-validation-for="ManufacturerId" class="text-danger"></span>

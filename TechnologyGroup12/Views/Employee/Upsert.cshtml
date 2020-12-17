@@ -42,7 +42,7 @@
                                    data-val="true" data-val-remote="Employee must be over 18 years."
                                    data-val-remote-additionalfields="*.Birth" data-val-remote-url="/Employee/CheckAge"
                                    id="Birth" name="Birth">
-                            <span asp-validation-for="Birth" class="text-danger offset-1"></span>
+                            <span asp-validation-for="Birth" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -52,7 +52,7 @@
                         <div class="form-group col-9">
                             @Html.DropDownListFor(m => m.Gender, Model.GenderList, "-Select a Category",
     new { @class = "form-control" })
-                            <span asp-validation-for="Gender" class="text-danger offset-1"></span>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
@@ -73,7 +73,7 @@
                                    data-val="true" data-val-remote="Email is Invalid."
                                    data-val-remote-additionalfields="*.Email" data-val-remote-url="/Employee/CheckEmail"
                                    id="Email" name="Email" value="">
-                            <span asp-validation-for="Email" class="text-danger offset-1"></span>
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">

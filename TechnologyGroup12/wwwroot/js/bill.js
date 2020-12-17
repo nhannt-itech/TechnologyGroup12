@@ -17,9 +17,24 @@ function loadDataTable() {
                 { "data": "id", "width": "15%" },
                 { "data": "customerName", "width": "15%" },
                 { "data": "employeeName", "width": "15%" },
-                { "data": "totalPriceBill", "width": "15%" },
-                { "data": "createDate", "width": "15%" },
-                { "data": "modifyDate", "width": "15%" },
+                {
+                    "data": "totalPriceBill",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
+                {
+                    "data": "createDate",
+                    "render": function (data) {
+                        return new Date(data).toLocaleString();
+                    }
+                },
+                {
+                    "data": "modifyDate",
+                    "render": function (data) {
+                        return new Date(data).toLocaleString();
+                    }
+                },
                 {
                     "data": "id",
                     "render": function (data) {
@@ -55,9 +70,24 @@ function SearchFor() {
                 { "data": "id", "width": "15%" },
                 { "data": "customerName", "width": "15%" },
                 { "data": "employeeName", "width": "15%" },
-                { "data": "totalPriceBill", "width": "15%" },
-                { "data": "createDate", "width": "15%" },
-                { "data": "modifyDate", "width": "15%" },
+                {
+                    "data": "totalPriceBill",
+                    "render": function (data) {
+                        return data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                    }
+                },
+                {
+                    "data": "createDate",
+                    "render": function (data) {
+                        return new Date(data).toLocaleString();
+                    }
+                },
+                {
+                    "data": "modifyDate",
+                    "render": function (data) {
+                        return new Date(data).toLocaleString();
+                    }
+                },
                 {
                     "data": "id",
                     "render": function (data) {
