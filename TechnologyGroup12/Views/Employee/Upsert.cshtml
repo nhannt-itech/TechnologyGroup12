@@ -38,7 +38,7 @@
                             <label>Birthday:</label>
                         </div>
                         <div class="form-group col-9">
-                            <input asp-for="Birth" type="datetime-local" class="form-control"
+                            <input asp-for="Birth" type="date" class="form-control"
                                    data-val="true" data-val-remote="Employee must be over 18 years."
                                    data-val-remote-additionalfields="*.Birth" data-val-remote-url="/Employee/CheckAge"
                                    id="Birth" name="Birth">
@@ -50,9 +50,11 @@
                             Gender:
                         </div>
                         <div class="form-group col-9">
-                            @Html.DropDownListFor(m => m.Gender, Model.GenderList, "-Select a Category",
-    new { @class = "form-control" })
-                            <span asp-validation-for="Gender" class="text-danger"></span>
+                            <select asp-for="Gender" name="Gender" class="form-control">
+                                <option value="Other">Other</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -72,7 +74,7 @@
                             <input asp-for="Email" type="text" class="form-control"
                                    data-val="true" data-val-remote="Email is Invalid."
                                    data-val-remote-additionalfields="*.Email" data-val-remote-url="/Employee/CheckEmail"
-                                   id="Email" name="Email" value="">
+                                   id="Email" name="Email">
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                     </div>
@@ -90,7 +92,7 @@
                             Job:
                         </div>
                         <div class="form-group col-9">
-                            @Html.DropDownListFor(m => m.JobPositionId, Model.JobPositionList, "-Select a Category",
+                            @Html.DropDownListFor(m => m.JobPositionId, Model.JobPositionList, "-Select a Job",
     new { @class = "form-control" })
                             <span asp-validation-for="JobPositionId" class="text-danger offset-1"></span>
                         </div>

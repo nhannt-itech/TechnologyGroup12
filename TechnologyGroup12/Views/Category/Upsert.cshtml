@@ -24,20 +24,21 @@
                 <form method="post" class="user">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
-                        <div class="col-3 text-lg">
+                        <div class="col-4 text-lg">
                             <label>Name:</label>
                         </div>
-                        <div class="form-group col-9">
+                        <div class="form-group col-8">
                             <input asp-for="Name" type="text" class="form-control">
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-3 text-lg">
+                        <div class="col-4 text-lg">
                             <label>Category Id:</label>
                         </div>
-                        <div class="form-group col-9">
-                            <input asp-for="CategoryId" type="text" class="form-control">
+                        <div class="form-group col-8">
+                            @Html.DropDownListFor(m => m.CategoryId, Model.CategoryList, "-Select a Category",
+                               new { @class = "form-control" })
                             <span asp-validation-for="CategoryId" class="text-danger"></span>
                         </div>
                     </div>

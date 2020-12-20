@@ -10,7 +10,17 @@ function loadDataTable() {
         },
         "columns": [
             { "data": "username" },
-            { "data": "role" },
+            {
+                "data": "role",
+                "render": function (data) {
+                    if (data == 1) {
+                        return 'ADMIN';
+                    }
+                    else {
+                        return 'User';
+                    }
+                }
+            },
             { "data": "employeeId" }
         ]
     });

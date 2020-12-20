@@ -46,10 +46,14 @@
                                     </div>
                                     <form method="post" class="user">
                                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                        <div class="form-group">
-                                            Current Connection: @Model.connectionString
-
-                                            <span asp-validation-for="connectionString" class="text-danger"></span>
+                                        <div class="form-group row">
+                                            <div class="col-4 text-lg">
+                                                <label>Current Connection: </label>
+                                            </div>
+                                            <div class="form-group col-8">
+                                                <input asp-for="connectionString" type="text" class="form-control" readonly>
+                                                <span asp-validation-for="connectionString" class="text-danger"></span>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <input asp-for="serverName" type="text" class="form-control" placeholder="Enter Server...">

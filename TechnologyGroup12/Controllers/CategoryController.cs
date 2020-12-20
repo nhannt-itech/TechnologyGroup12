@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TechnologyGroup12.DataAccess.Repository.IRepository;
 using TechnologyGroup12.Models.Models;
 
@@ -25,7 +26,13 @@ namespace TechnologyGroup12.Controllers
 
         public IActionResult Upsert(long? id)
         {
+            var lCategory = _unitOfWork.SP_Call.List<Category>("SP_GetAll_Category");
             Category category = new Category();
+            category.CategoryList = lCategory.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
             if (id == null)
             {
                 return View(category);
@@ -33,6 +40,11 @@ namespace TechnologyGroup12.Controllers
             var parameters = new DynamicParameters();
             parameters.Add("@Id", id);
             category = _unitOfWork.SP_Call.OneRecord<Category>("SP_Get_Category", parameters);
+            category.CategoryList = lCategory.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
             return View(category);
         }
 
@@ -40,6 +52,13 @@ namespace TechnologyGroup12.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Category category)
         {
+            var lCategory = _unitOfWork.SP_Call.List<Category>("SP_GetAll_Category");
+            category.CategoryList = lCategory.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+
             var parameter = new DynamicParameters();
             parameter.Add("@Name", category.Name);
             parameter.Add("@CategoryId", category.CategoryId);

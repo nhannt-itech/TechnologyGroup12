@@ -89,8 +89,17 @@ namespace TechnologyGroup12.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.SP_Call.List<Account>("SP_GetAll_Account");
-            return Json(new { data = allObj.AsEnumerable() });
+            try
+            {
+                var allObj = _unitOfWork.SP_Call.List<Account>("SP_GetAll_Account");
+                return Json(new { data = allObj });
+            }
+            catch
+            {
+                List<Account> list = new List<Account>();
+                IEnumerable<Account> allObj = list;
+                return Json(new { data = allObj });
+            }
         }
 
     }

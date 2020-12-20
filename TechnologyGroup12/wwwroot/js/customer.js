@@ -24,7 +24,6 @@ function loadDataTable() {
                         isVip: "isVip"
                     },
                     "render": function (data) {
-
                         if (data.isVip == false) {
                             return `
                             <div class="text-center">
@@ -35,7 +34,7 @@ function loadDataTable() {
                         else {
                             return `
                             <div class="text-center">
-                                <i class="btn btn-warning text-white fas fa-ban"></i> 
+                                <i class="btn btn-warning text-white fas fa-user"></i> 
                             </div>
                             `;
                         }
@@ -83,18 +82,17 @@ function SearchFor() {
                         isVip: "isVip"
                     },
                     "render": function (data) {
-
                         if (data.isVip == false) {
                             return `
                             <div class="text-center">
-                                <i class="btn btn-warning text-white fas fa-user"></i> 
+                                <i class="btn btn-dark text-white fas fa-user"></i> 
                             </div>
                             `;
                         }
                         else {
                             return `
                             <div class="text-center">
-                                <i class="btn btn-danger text-white fas fa-ban"></i> 
+                                <i class="btn btn-warning text-white fas fa-user"></i> 
                             </div>
                             `;
                         }

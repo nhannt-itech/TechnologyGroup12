@@ -52,12 +52,8 @@ function Delete(discountId, productId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/DiscountProduct/Delete',
                 type: 'DELETE',
-                async: false,
-                dataType: 'text',
-                processData: false,
-                data: "discountId=" + discountId + "&productId=" + productId,
+                url: '/DiscountProduct/Delete/?discountId=' + discountId + "&productId=" + productId,
                 success: function (data) {
                     if (data.success) {
                         swalWithBootstrapButtons.fire(
