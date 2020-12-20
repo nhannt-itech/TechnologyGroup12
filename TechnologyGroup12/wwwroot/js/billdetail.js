@@ -26,7 +26,7 @@ function loadDataTable() {
                 {
                     "data": "discount",
                     "render": function (data) {
-                        return (data * 100).toString() + '%';
+                        return Math.round((data * 100).toString()) + '%';
                     }
                 },                {
                     "data": "id",
