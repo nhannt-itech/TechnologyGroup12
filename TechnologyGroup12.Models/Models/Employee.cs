@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,11 +20,13 @@ namespace TechnologyGroup12.Models.Models
         [Required]
         public string Name { get; set; }
         [Required]
+        [Remote("CheckAge", "Employee", ErrorMessage = "Employee must be over 18 years.")]
         public DateTime Birth { get; set; }
         public string Gender { get; set; }
         [Required]
         public string Phone { get; set; }
         [Required]
+        [Remote("CheckEmail", "Employee", ErrorMessage = "Email is Invalid.")]
         public string Email { get; set; }
         public string Address { get; set; }
         [Required]

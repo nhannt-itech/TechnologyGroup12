@@ -21,6 +21,7 @@ namespace TechnologyGroup12.Models.Models
         [Required]
         public string Phone { get; set; }
         [Required]
+        [Remote("CheckEmail", "Customer", ErrorMessage = "Email is Invalid.")]
         public string Email { get; set; }
         public string Address { get; set; }
         public bool IsVip { get; set; }

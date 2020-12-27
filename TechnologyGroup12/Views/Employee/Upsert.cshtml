@@ -38,10 +38,7 @@
                             <label>Birthday:</label>
                         </div>
                         <div class="form-group col-9">
-                            <input asp-for="Birth" type="date" class="form-control"
-                                   data-val="true" data-val-remote="Employee must be over 18 years."
-                                   data-val-remote-additionalfields="*.Birth" data-val-remote-url="/Employee/CheckAge"
-                                   id="Birth" name="Birth">
+                            <input asp-for="Birth" type="date" class="form-control">
                             <span asp-validation-for="Birth" class="text-danger"></span>
                         </div>
                     </div>
@@ -71,10 +68,7 @@
                             <label>Email:</label>
                         </div>
                         <div class="form-group col-9">
-                            <input asp-for="Email" type="text" class="form-control"
-                                   data-val="true" data-val-remote="Email is Invalid."
-                                   data-val-remote-additionalfields="*.Email" data-val-remote-url="/Employee/CheckEmail"
-                                   id="Email" name="Email">
+                            <input asp-for="Email" type="text" class="form-control">
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
                     </div>
