@@ -25,16 +25,18 @@ namespace TechnologyGroup12.Controllers
 
         public IActionResult Index()
         {
-            //Khởi tạo một list string rỗng.
-            List<string> lDatabase = new List<string>();
+            List<string> lDatabase = new List<string>(); 
+            // Khởi tạo một list Database Name rỗng
             ServerConnection serverConnection = new ServerConnection()
             {
                 connectionString = _writableCnt.Value.DefaultConnection.ToString(),
+                // Ghi lại connectionstring của lần kết nối lần trước.
                 databaseTable = lDatabase.Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
                 })
+                // Chuyển list Database Name rỗng ở trên thành DropDown trên Html để không bị lỗi
             };
             return View(serverConnection);
         }
@@ -47,10 +49,10 @@ namespace TechnologyGroup12.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
+                    //Trường hợp này là đã có tên Database : TechnologyDB và bắt đầu kết nối
                     var connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.databaseName, serverConnection.userName,
                         serverConnection.passWord);
-                    // Nếu như không có username thì là connect quyền bình thường
+                    // ------------Vùng này là làm lại cái DropDown trên Html mà có dữ liêu------------
                     if (serverConnection.userName != null)
                     {
                         connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.databaseName, serverConnection.userName,
@@ -63,6 +65,7 @@ namespace TechnologyGroup12.Controllers
 
                     connectionString.Open();
                     SqlCommand cmd = new SqlCommand("SELECT name from sys.databases", connectionString);
+                    // Câu lệnh tìm kiếm tất cả tên bảng trong SQL
 
                     List<string> lDatabase = new List<string>();
                     using (IDataReader dr = cmd.ExecuteReader())
@@ -73,13 +76,16 @@ namespace TechnologyGroup12.Controllers
                         }
                     }
 
+
                     serverConnection.databaseTable = lDatabase.Select(i => new SelectListItem
                     {
                         Text = i,
                         Value = i
                     });
+                    // ------------------------- Kết thúc vùng -------------------------
 
 
+                    //------------------------- Bắt đầu kết nối -------------------------
                     if (serverConnection.userName != null)
                     {
                         _writableCnt.Update(opt =>
@@ -109,6 +115,8 @@ namespace TechnologyGroup12.Controllers
                 // -- Bắt đầu từ dòng này là đã có database
                 else if (serverConnection.serverName != null)
                 {
+                    // Chọn ra list Database để chọn Database để kết nối
+
                     var connectionString = ExecuteConnection.Connect(serverConnection.serverName, serverConnection.userName,
                         serverConnection.passWord);
                     if (serverConnection.userName != null)
@@ -143,6 +151,7 @@ namespace TechnologyGroup12.Controllers
             }
             catch (Exception ex)
             {
+                // Trả lỗi trên HTML
                 ModelState.AddModelError(string.Empty, ex.Message);
                 List<string> lDatabase = new List<string>();
 
